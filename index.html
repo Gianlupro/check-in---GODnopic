@@ -622,7 +622,7 @@ function buildGuestCard(n) {
   g3a.appendChild(field(t.f_nationality, inpNat));
   g3a.appendChild(field(t.f_pob, inpPob));
   g3a.appendChild(field(t.f_dob, inpDob));
-  inpDob.dataset.dpYear = '1985';
+  inpDob.dataset.dpYear = String(new Date().getFullYear());
   body.appendChild(g3a);
 
   // Sesso
@@ -671,7 +671,7 @@ function buildGuestCard(n) {
   gDocExp.style.marginTop = '16px';
   var inpDocExp = inp('text', true);
   gDocExp.appendChild(field(t.f_docexp, inpDocExp));
-  inpDocExp.dataset.dpYear = String(new Date().getFullYear() + 3);
+  inpDocExp.dataset.dpYear = String(new Date().getFullYear());
   body.appendChild(gDocExp);
 
 
