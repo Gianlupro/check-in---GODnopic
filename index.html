@@ -53,7 +53,6 @@
   .guest-body { padding: 0 28px 28px; }
   .guest-card.collapsed .guest-body { display: none; }
   
-  /* Grid migliorata per mobile */
   .grid { display: grid; gap: 16px; }
   .grid-2 { grid-template-columns: 1fr 1fr; }
   .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -98,7 +97,6 @@
   .divider { border: none; border-top: 1px solid var(--border); margin: 4px 0 20px; }
   .section-intro { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--mid); margin-bottom: 22px; }
 
-  /* SESSION BOX */
   .session-box { background: rgba(196,113,74,.06); border: 1px solid rgba(196,113,74,.2); border-radius: 4px; padding: 14px 16px; margin-top: 20px; }
   .session-box-label { font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
   .session-box-hint { font-size: 12px; color: var(--mid); margin-bottom: 10px; line-height: 1.5; }
@@ -106,7 +104,6 @@
   .session-link-text { font-size: 11px; color: var(--terracotta); word-break: break-all; flex: 1; }
   .session-copy-btn { flex-shrink: 0; background: var(--terracotta); color: #fff; border: none; border-radius: 3px; padding: 7px 14px; font-family: 'DM Sans', sans-serif; font-size: 12px; cursor: pointer; white-space: nowrap; }
 
-  /* DATE PICKER */
   .dp-wrap { position: relative; }
   .dp-input { cursor: pointer; caret-color: transparent; user-select: none; }
   .dp-popup { display: none; position: absolute; top: calc(100% + 4px); left: 0; z-index: 300;
@@ -136,10 +133,8 @@
     padding: 4px 2px; text-transform: uppercase; letter-spacing: 1px;
     font-family: 'DM Sans', sans-serif; }
 
-  /* TOAST */
   .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--charcoal); color: var(--cream); padding: 12px 20px; border-radius: 4px; font-size: 13px; z-index: 200; box-shadow: 0 4px 20px rgba(0,0,0,.3); opacity: 0; transition: opacity .3s; pointer-events: none; }
   .toast.show { opacity: 1; }
-  /* CONFIRM MODAL */
   .confirm-overlay { display: none; position: fixed; inset: 0; background: rgba(44,40,37,.5); z-index: 90; align-items: center; justify-content: center; }
   .confirm-overlay.show { display: flex; }
   .confirm-box { background: var(--warm-white); border-radius: 6px; padding: 40px 36px; max-width: 440px; width: 90%; text-align: center; border-top: 4px solid var(--terracotta); }
@@ -168,10 +163,8 @@
 
 <div class="container">
 
-  <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
-  <!-- BENVENUTO -->
   <div class="card" style="border-left:4px solid var(--terracotta);background:linear-gradient(135deg,#fff8f4 0%,var(--warm-white) 100%);">
     <p style="font-size:14px;line-height:1.75;color:var(--charcoal);">
       <span data-i18n="welcome_text">Per completare il check-in è <strong>obbligatorio compilare questo modulo</strong> con i dati di <strong>TUTTI gli ospiti</strong>.<br>I dati sono richiesti dalla normativa italiana e verranno comunicati alle autorità competenti.</span><br>
@@ -180,7 +173,6 @@
     </p>
   </div>
 
-  <!-- SOGGIORNO -->
   <div class="card">
     <div class="card-label" data-i18n="booking_label">Dettagli soggiorno</div>
     <div class="card-title" data-i18n="booking_title">Informazioni sulla prenotazione</div>
@@ -198,7 +190,6 @@
         </select>
       </div>
     </div>
-    <!-- SESSION BOX -->
     <div class="session-box">
       <div class="session-box-label" data-i18n="session_label">Link sessione condivisa</div>
       <div class="session-box-hint" data-i18n="session_hint">Condividi questo link nel gruppo — tutti possono aprirlo e aggiungere i propri dati. L'invio finale va fatto da un solo dispositivo.</div>
@@ -209,7 +200,6 @@
     </div>
   </div>
 
-  <!-- OSPITI -->
   <div class="card">
     <div class="card-label" data-i18n="guests_label">Registrazione ospiti</div>
     <div class="card-title" data-i18n="guests_title">Dati anagrafici</div>
@@ -221,7 +211,6 @@
     </button>
   </div>
 
-  <!-- PRIVACY -->
   <div class="card">
     <div class="card-label" data-i18n="privacy_label">Privacy & Consenso</div>
     <div class="card-title" data-i18n="privacy_title">Informativa sul trattamento dei dati</div>
@@ -247,7 +236,6 @@
 
 </div>
 
-<!-- SUCCESS -->
 <div class="success-overlay" id="success-overlay">
   <div class="success-box">
     <div class="success-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 14.5l5.5 5.5L22 9" stroke="#c4714a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -256,7 +244,6 @@
   </div>
 </div>
 
-<!-- CONFIRM MODAL -->
 <div class="confirm-overlay" id="confirm-overlay">
   <div class="confirm-box">
     <h3 data-i18n="confirm_title">Conferma invio</h3>
@@ -269,11 +256,11 @@
 </div>
 
 <script>
-// ── COSTANTI ──────────────────────────────────────────────────
+// COSTANTI
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw65iMX-MJDsPafjq2TQ2Hm8UbZnMFt1gRyRA-2U9c/dev';
 const FIREBASE_URL    = 'https://riminiseayoucheckin-default-rtdb.europe-west1.firebasedatabase.app';
 
-// ── SESSION ID dall'URL ───────────────────────────────────────
+// SESSION ID dall'URL
 const SESSION_ID = (function() {
   var p = new URLSearchParams(window.location.search);
   var s = p.get('s');
@@ -284,7 +271,6 @@ const SESSION_ID = (function() {
   return s;
 })();
 
-// ── TOAST ─────────────────────────────────────────────────────
 function showToast(msg) {
   var t = document.getElementById('toast');
   t.textContent = msg;
@@ -292,7 +278,6 @@ function showToast(msg) {
   setTimeout(function() { t.classList.remove('show'); }, 3000);
 }
 
-// ── COPIA LINK ────────────────────────────────────────────────
 function copyLink() {
   var url = window.location.href;
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -305,6 +290,7 @@ function copyLink() {
     fallbackCopy(url);
   }
 }
+
 function fallbackCopy(url) {
   var ta = document.createElement('textarea');
   ta.value = url;
@@ -317,7 +303,6 @@ function fallbackCopy(url) {
   document.body.removeChild(ta);
 }
 
-// ── VALIDAZIONE DATE ──────────────────────────────────────────
 function validateDates() {
   var ciP = DP.get('checkin-date');
   var coP = DP.get('checkout-date');
@@ -330,7 +315,6 @@ function validateDates() {
   }
 }
 
-// ── SALVATAGGIO COMPLETO SU FIREBASE ──────────────────────────
 function saveAllToFirebase() {
   var data = collectAllData();
   fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json', {
@@ -368,13 +352,11 @@ function collectAllData() {
       docExpiry:   inputs[7] ? (inputs[7].dataset.iso || inputs[7].value) : ''
     };
     data.guests.push(guest);
-
   });
   
   return data;
 }
 
-// ── LINGUA ────────────────────────────────────────────────────
 var currentLang = 'it';
 var T = {
   it: {
@@ -494,16 +476,15 @@ function setLang(lang) {
     var key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
-  // Aggiorna testi nei pulsanti salvati e nelle etichette dei campi
+  
   document.querySelectorAll('.guest-card').forEach(function(card, i) {
     var saveBtn = card.querySelector('.btn-save-guest');
     var editBtn = card.querySelector('.btn-edit');
     var badge = card.querySelector('.badge-saved');
     if (saveBtn) saveBtn.textContent = t.btn_save;
     if (editBtn) editBtn.textContent = t.btn_edit;
-    if (badge) badge.textContent = '✅ ' + t.badge_saved;
+    if (badge) badge.innerHTML = '✅ ' + t.badge_saved;
     
-    // Aggiorna etichette dei campi
     var labels = card.querySelectorAll('.field label');
     var fields = card.querySelectorAll('.field');
     if (labels.length > 0 && fields.length > 0) {
@@ -526,7 +507,6 @@ function setLang(lang) {
   });
 }
 
-// ── OSPITE CARD ───────────────────────────────────────────────
 var guestCount = 0;
 
 function buildGuestCard(n) {
@@ -537,7 +517,6 @@ function buildGuestCard(n) {
   card.className = 'guest-card';
   card.id = 'guest-' + n;
 
-  // Header (collassabile)
   var header = document.createElement('div');
   header.className = 'guest-header';
   header.onclick = function(e) {
@@ -567,7 +546,6 @@ function buildGuestCard(n) {
 
   var actionsDiv = document.createElement('div');
   actionsDiv.className = 'guest-actions';
-  // Il pulsante Salva viene spostato dopo la foto, non qui
   var editBtn = document.createElement('button');
   editBtn.className = 'btn-edit';
   editBtn.textContent = t.btn_edit;
@@ -583,7 +561,6 @@ function buildGuestCard(n) {
   header.appendChild(actionsDiv);
   card.appendChild(header);
 
-  // Body
   var body = document.createElement('div');
   body.className = 'guest-body';
 
@@ -603,7 +580,6 @@ function buildGuestCard(n) {
     return i;
   }
 
-  // Dati anagrafici - 2 colonne: Cognome, Nome
   var g2a = document.createElement('div');
   g2a.className = 'grid grid-2';
   var inpSurname = inp('text', true);
@@ -612,7 +588,6 @@ function buildGuestCard(n) {
   g2a.appendChild(field(t.f_name, inpName));
   body.appendChild(g2a);
 
-  // Dati anagrafici - 3 colonne: Cittadinanza, Luogo nascita, Data nascita
   var g3a = document.createElement('div');
   g3a.className = 'grid grid-3';
   g3a.style.marginTop = '16px';
@@ -625,7 +600,6 @@ function buildGuestCard(n) {
   inpDob.dataset.dpYear = String(new Date().getFullYear());
   body.appendChild(g3a);
 
-  // Sesso
   var gGender = document.createElement('div');
   gGender.className = 'grid grid-2';
   gGender.style.marginTop = '16px';
@@ -643,7 +617,6 @@ function buildGuestCard(n) {
   gGender.appendChild(field(t.f_gender, selGender));
   body.appendChild(gGender);
 
-  // Dati documento - 3 colonne: Tipo, Numero, Luogo rilascio
   var g3b = document.createElement('div');
   g3b.className = 'grid grid-3';
   g3b.style.marginTop = '16px';
@@ -665,7 +638,6 @@ function buildGuestCard(n) {
   g3b.appendChild(field(t.f_docissuer, inpDocIssuer));
   body.appendChild(g3b);
 
-  // Scadenza documento - 2 colonne (obbligatoria)
   var gDocExp = document.createElement('div');
   gDocExp.className = 'grid grid-2';
   gDocExp.style.marginTop = '16px';
@@ -674,11 +646,8 @@ function buildGuestCard(n) {
   inpDocExp.dataset.dpYear = String(new Date().getFullYear());
   body.appendChild(gDocExp);
 
-
-
   card.appendChild(body);
 
-  // ✅ Aggiungi il pulsante Salva QUI, dopo la foto
   var saveBtnContainer = document.createElement('div');
   saveBtnContainer.style.marginTop = '16px';
   saveBtnContainer.style.textAlign = 'right';
@@ -699,7 +668,6 @@ function addGuest() {
   guestCount++;
   var card = buildGuestCard(guestCount);
   document.getElementById('guests-container').appendChild(card);
-  // Init date pickers AFTER card is in DOM
   card.querySelectorAll('input[data-dp-year]').forEach(function(inp) {
     DP.attach(inp, { year: parseInt(inp.dataset.dpYear) });
   });
@@ -720,9 +688,6 @@ function toggleGuestCard(n) {
   card.classList.toggle('collapsed');
 }
 
-
-
-// ── GESTIONE MODIFICA DATI ────────────────────────────────────
 function setFieldsDisabled(card, disabled) {
   var inputs = card.querySelectorAll('input');
   var selects = card.querySelectorAll('select');
@@ -732,12 +697,8 @@ function setFieldsDisabled(card, disabled) {
   selects.forEach(function(sel) {
     sel.disabled = disabled;
   });
-  // Non disabilitare l'upload foto
-  var fileInput = card.querySelector('.doc-upload-input');
-  if (fileInput) fileInput.disabled = false;
 }
 
-// ── SALVA SINGOLO OSPITE ──────────────────────────────────────
 function collectGuestData(n) {
   var card = document.getElementById('guest-' + n);
   if (!card) return null;
@@ -763,33 +724,27 @@ async function saveGuest(n) {
   var data = collectGuestData(n);
   if (!data) return;
 
-  // Controlla campi obbligatori
   if (!data.surname || !data.firstName || !data.nationality || !data.pob || !data.dob || !data.gender || 
       !data.docType || !data.docNumber || !data.docIssuer || !data.docExpiry) {
     showToast('⚠️ Compila tutti i campi obbligatori');
     return;
   }
 
-  // Salva su Firebase
   try {
-    // Carica dati esistenti
     var resp = await fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json');
     var existing = await resp.json();
     if (!existing) existing = { booking: {}, guests: [], photos: {} };
     if (!existing.guests) existing.guests = [];
     if (!existing.photos) existing.photos = {};
 
-    // Aggiorna ospite
     existing.guests[n-1] = data;
 
-    // Salva
     await fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(existing)
     });
 
-    // Aggiorna UI
     var card = document.getElementById('guest-' + n);
     card.classList.add('collapsed');
     card.classList.add('saved');
@@ -800,7 +755,6 @@ async function saveGuest(n) {
     saveBtn.style.display = 'none';
     editBtn.style.display = 'inline-block';
     
-    // Disabilita tutti i campi
     setFieldsDisabled(card, true);
     
     showToast('✓ ' + data.firstName + ' ' + data.surname + ' salvato!');
@@ -817,11 +771,9 @@ function editGuest(n) {
   saveBtn.style.display = 'inline-block';
   editBtn.style.display = 'none';
   
-  // Abilita tutti i campi
   setFieldsDisabled(card, false);
 }
 
-// ── CONFERMA INVIO ────────────────────────────────────────────
 function confirmSubmit() {
   document.getElementById('confirm-overlay').classList.add('show');
 }
@@ -830,7 +782,6 @@ function closeConfirm() {
   document.getElementById('confirm-overlay').classList.remove('show');
 }
 
-// ── SUBMIT ────────────────────────────────────────────────────
 async function submitForm() {
   var t = T[currentLang];
   var privacyOk = document.getElementById('privacy-ok').checked;
@@ -843,25 +794,15 @@ async function submitForm() {
   if (!checkin || !checkout || !arrival || !totGuests) { alert(t.alert_fields); return; }
   if (!privacyOk || !rulesOk) { alert(t.alert_privacy); return; }
   if (guestCount === 0) { alert(t.alert_guest_min); return; }
-  
-
 
   var btn = document.querySelector('.btn-submit');
   btn.textContent = t.alert_sending;
   btn.disabled = true;
   closeConfirm();
 
-
-
   try {
-    // ✅ 1. Genera il folderName e invia i dati testuali
     var cards = document.querySelectorAll('.guest-card');
-    var g1Inputs = cards[0].querySelectorAll('input');
-    var firstName = g1Inputs[0] ? g1Inputs[0].value : 'Ospite';
-    var lastName = g1Inputs[1] ? g1Inputs[1].value : '';
-    var folderName = checkin + '_' + firstName + '_' + lastName;
-
-    // ✅ 2. Invia dati testuali
+    
     var params = new URLSearchParams();
     params.append('action','saveData');
     params.append('Check_in', checkin);
@@ -888,15 +829,10 @@ async function submitForm() {
       params.append('G'+n+'_DocExpiry',   inp[7] ? inp[7].value : '');
     });
 
-    // STEP 1: invia dati testuali e ottieni folderId dalla risposta
     var saveResp = await fetch(APPS_SCRIPT_URL + '?' + params.toString(), { method:'GET', redirect:'follow' });
     var saveJson = await saveResp.json();
     if (saveJson.result !== 'ok') throw new Error('saveData failed: ' + (saveJson.message||''));
-    var folderId = saveJson.folderId;
 
-
-
-    // ✅ 5. Elimina sessione Firebase
     fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json', { method:'DELETE' }).catch(function(){});
 
     document.getElementById('success-overlay').classList.add('show');
@@ -906,15 +842,12 @@ async function submitForm() {
 
   } catch(err) {
     alert(t.alert_neterror);
+    console.error(err);
     btn.textContent = T[currentLang].btn_submit;
     btn.disabled = false;
   }
 }
 
-
-// ─────────────────────────────────────────────
-//  DATE PICKER ENGINE
-// ─────────────────────────────────────────────
 var DP = (function() {
   var store = {};
   var MO_IT = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
@@ -1079,22 +1012,18 @@ var DP = (function() {
   return { make:make, attach:attach, get:function(id){return store[id];} };
 }());
 
-// Init date pickers per checkin/checkout (dopo DOM ready)
 function initBookingDatePickers() {
   var todayISO = new Date().toISOString().split('T')[0];
-  // Sostituisce i due input date statici con custom pickers
   var ciEl = document.getElementById('checkin-date');
   var coEl = document.getElementById('checkout-date');
   if (!ciEl || !coEl) return;
 
-  // Wrap checkin
   ciEl.type = 'text'; ciEl.readOnly = true; ciEl.classList.add('dp-input'); ciEl.placeholder = 'gg/mm/aaaa';
   var ciWrap = document.createElement('div'); ciWrap.className = 'dp-wrap';
   ciEl.parentNode.insertBefore(ciWrap, ciEl); ciWrap.appendChild(ciEl);
   var ciPop = document.createElement('div'); ciPop.className = 'dp-popup'; ciPop.id = 'dp-checkin-date'; ciWrap.appendChild(ciPop);
   DP.make('checkin-date', { minDate: todayISO, onChange: function() { saveAllToFirebase(); validateDates(); } });
 
-  // Wrap checkout
   coEl.type = 'text'; coEl.readOnly = true; coEl.classList.add('dp-input'); coEl.placeholder = 'gg/mm/aaaa';
   var coWrap = document.createElement('div'); coWrap.className = 'dp-wrap';
   coEl.parentNode.insertBefore(coWrap, coEl); coWrap.appendChild(coEl);
@@ -1102,27 +1031,20 @@ function initBookingDatePickers() {
   DP.make('checkout-date', { minDate: todayISO, onChange: function() { saveAllToFirebase(); } });
 }
 
-// ── INIT ──────────────────────────────────────────────────────
 document.getElementById('session-link-text').textContent = window.location.href;
 initBookingDatePickers();
-
-// Imposta la lingua iniziale
 setLang('it');
 
-// Imposta la data minima per oggi
 var today = new Date().toISOString().split('T')[0];
 document.getElementById('checkin-date').setAttribute('min', today);
 document.getElementById('checkout-date').setAttribute('min', today);
 
-// Aggiungi un ospite di default
 addGuest();
 
-// Carica TUTTI i dati da Firebase (booking + guests)
 fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json')
   .then(function(r) { return r.json(); })
   .then(function(data) {
     if (data) {
-      // Carica booking
       if (data.booking) {
         if (data.booking.checkin) { var p=DP.get('checkin-date'); if(p) p.setISO(data.booking.checkin); }
         if (data.booking.checkout) { var p=DP.get('checkout-date'); if(p) p.setISO(data.booking.checkout); }
@@ -1130,7 +1052,6 @@ fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json')
         if (data.booking.totGuests) document.getElementById('total-guests').value = data.booking.totGuests;
       }
       
-      // Carica guests
       if (data.guests && data.guests.length > 0) {
         document.getElementById('guests-container').innerHTML = '';
         guestCount = 0;
@@ -1150,7 +1071,6 @@ fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json')
           if (inputs[6])  inputs[6].value  = g.docIssuer   || '';
           if (inputs[7] && g.docExpiry) { inputs[7].dataset.iso=g.docExpiry; inputs[7].value=g.docExpiry.split('-').reverse().join('/'); }
 
-          // Se l'ospite è salvato, collassa, mostra nome e badge, e disabilita campi
           if (g.firstName || g.surname || g.docNumber) {
             var card = document.getElementById('guest-' + (i+1));
             card.classList.add('collapsed');
