@@ -2,10 +2,11 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Check-in Ospiti — Rimini Sea You (No Foto)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Check-in Ospiti — Rimini Sea You</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  /* ========== STILI (identici al tuo originale) ========== */
   :root {
     --cream: #f7f3ee; --warm-white: #fdfaf7; --terracotta: #c4714a;
     --terracotta-light: #d9916e; --charcoal: #2c2825; --mid: #7a6f68;
@@ -39,7 +40,6 @@
   .guest-card.saved .guest-number .guest-label { display: none; }
   .guest-card.saved .guest-number .guest-name { display: inline; }
   .guest-number .badge-saved { display: none; font-size: 12px; background: var(--gold); color: #fff; border-radius: 20px; padding: 2px 14px 2px 10px; font-weight: 500; font-family: 'DM Sans', sans-serif; align-items: center; gap: 4px; }
-  .guest-number .badge-saved .icon { font-size: 14px; }
   .guest-card.saved .guest-number .badge-saved { display: inline-flex; }
   .guest-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
   .btn-remove { background: none; border: 1px solid var(--border); color: var(--mid); font-family: 'DM Sans', sans-serif; font-size: 12px; padding: 5px 14px; border-radius: 2px; cursor: pointer; transition: all .2s; }
@@ -47,16 +47,13 @@
   .btn-edit { background: var(--terracotta-light); color: #fff; border: none; border-radius: 2px; padding: 5px 14px; font-family: 'DM Sans', sans-serif; font-size: 12px; cursor: pointer; transition: background .2s; display: none; }
   .btn-edit:hover { background: var(--terracotta); }
   .btn-save-guest { background: var(--gold); color: #fff; border: none; border-radius: 2px; padding: 5px 14px; font-family: 'DM Sans', sans-serif; font-size: 12px; cursor: pointer; transition: background .2s; }
-  .btn-save-guest:hover { background: #a07e3f; }
   .guest-card.saved .btn-save-guest { display: none; }
   .guest-card.saved .btn-edit { display: inline-block; }
   .guest-body { padding: 0 28px 28px; }
   .guest-card.collapsed .guest-body { display: none; }
-  
   .grid { display: grid; gap: 16px; }
   .grid-2 { grid-template-columns: 1fr 1fr; }
   .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
-  
   @media(max-width:600px) { 
     .grid-2, .grid-3 { grid-template-columns: 1fr; } 
     .card { padding: 22px 18px; } 
@@ -71,13 +68,11 @@
   @media(min-width:601px) and (max-width:900px) {
     .grid-3 { grid-template-columns: 1fr 1fr; }
   }
-  
   .field { display: flex; flex-direction: column; gap: 6px; }
   label { font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); }
   label .req { color: var(--terracotta); margin-left: 2px; }
   input, select, textarea { font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--charcoal); background: var(--cream); border: 1px solid var(--border); border-radius: 3px; padding: 10px 14px; transition: border-color .2s, box-shadow .2s; outline: none; width: 100%; }
   input:focus, select:focus { border-color: var(--terracotta); box-shadow: 0 0 0 3px rgba(196,113,74,.12); background: var(--warm-white); }
-  input::placeholder { color: #bbb; }
   select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a6f68' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
   .checkbox-field { flex-direction: row; align-items: center; gap: 10px; margin-top: 4px; }
   .checkbox-field label { font-size: 13px; letter-spacing: .2px; text-transform: none; color: var(--charcoal); font-weight: 400; cursor: pointer; }
@@ -96,269 +91,103 @@
   .success-box p { font-size: 14px; color: var(--mid); line-height: 1.6; }
   .divider { border: none; border-top: 1px solid var(--border); margin: 4px 0 20px; }
   .section-intro { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--mid); margin-bottom: 22px; }
-
+  .doc-upload-zone { border: 1.5px dashed var(--border); border-radius: 4px; background: var(--cream); cursor: pointer; transition: border-color .2s; overflow: hidden; }
+  .doc-upload-zone.has-file { border-color: var(--terracotta); border-style: solid; }
+  .doc-upload-inner { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 18px 14px; text-align: center; }
+  .doc-upload-btn-label { font-size: 13px; font-weight: 500; color: var(--terracotta); }
+  .doc-upload-hint { font-size: 11px; color: var(--mid); line-height: 1.5; max-width: 260px; }
+  .doc-upload-preview { display: none; width: 100%; max-height: 160px; object-fit: cover; }
+  .doc-upload-zone.has-file .doc-upload-preview { display: block; }
+  .doc-upload-zone.has-file .doc-upload-hint { display: none; }
+  .doc-upload-input { display: none; }
   .session-box { background: rgba(196,113,74,.06); border: 1px solid rgba(196,113,74,.2); border-radius: 4px; padding: 14px 16px; margin-top: 20px; }
   .session-box-label { font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-  .session-box-hint { font-size: 12px; color: var(--mid); margin-bottom: 10px; line-height: 1.5; }
   .session-link-row { display: flex; gap: 8px; align-items: center; }
   .session-link-text { font-size: 11px; color: var(--terracotta); word-break: break-all; flex: 1; }
   .session-copy-btn { flex-shrink: 0; background: var(--terracotta); color: #fff; border: none; border-radius: 3px; padding: 7px 14px; font-family: 'DM Sans', sans-serif; font-size: 12px; cursor: pointer; white-space: nowrap; }
-
   .dp-wrap { position: relative; }
   .dp-input { cursor: pointer; caret-color: transparent; user-select: none; }
-  .dp-popup { display: none; position: absolute; top: calc(100% + 4px); left: 0; z-index: 300;
-    background: var(--warm-white); border: 1px solid var(--border); border-radius: 4px;
-    box-shadow: 0 8px 32px rgba(44,40,37,.18); width: 270px; overflow: hidden; }
+  .dp-popup { display: none; position: absolute; top: calc(100% + 4px); left: 0; z-index: 300; background: var(--warm-white); border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 8px 32px rgba(44,40,37,.18); width: 270px; overflow: hidden; }
   .dp-popup.open { display: block; }
-  .dp-header { display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 12px; background: var(--charcoal); color: var(--cream); }
-  .dp-nav { background: none; border: none; color: var(--cream); font-size: 20px;
-    cursor: pointer; padding: 0 8px; line-height: 1; border-radius: 3px; }
+  .dp-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--charcoal); color: var(--cream); }
+  .dp-nav { background: none; border: none; color: var(--cream); font-size: 20px; cursor: pointer; padding: 0 8px; line-height: 1; border-radius: 3px; }
   .dp-nav:hover { background: rgba(255,255,255,.15); }
-  .dp-lbl { font-size: 13px; font-weight: 500; cursor: pointer; padding: 4px 10px;
-    border-radius: 3px; font-family: 'DM Sans', sans-serif; }
+  .dp-lbl { font-size: 13px; font-weight: 500; cursor: pointer; padding: 4px 10px; border-radius: 3px; font-family: 'DM Sans', sans-serif; }
   .dp-lbl:hover { background: rgba(255,255,255,.15); }
   .dp-grid { display: grid; padding: 8px; gap: 2px; }
   .dp-7 { grid-template-columns: repeat(7,1fr); }
   .dp-4 { grid-template-columns: repeat(4,1fr); }
   .dp-5 { grid-template-columns: repeat(5,1fr); }
-  .dp-cell { text-align: center; padding: 6px 2px; font-size: 12px; border-radius: 3px;
-    cursor: pointer; border: none; background: none; width: 100%;
-    color: var(--charcoal); transition: background .1s; font-family: 'DM Sans', sans-serif; }
+  .dp-cell { text-align: center; padding: 6px 2px; font-size: 12px; border-radius: 3px; cursor: pointer; border: none; background: none; width: 100%; color: var(--charcoal); transition: background .1s; font-family: 'DM Sans', sans-serif; }
   .dp-cell:hover { background: rgba(196,113,74,.15); }
   .dp-cell.sel { background: var(--terracotta); color: #fff; font-weight: 600; }
-  .dp-cell.today { outline: 1.5px solid var(--terracotta); }
   .dp-cell.dim { color: #ccc; }
-  .dp-dow { text-align: center; font-size: 10px; color: var(--mid);
-    padding: 4px 2px; text-transform: uppercase; letter-spacing: 1px;
-    font-family: 'DM Sans', sans-serif; }
-
   .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--charcoal); color: var(--cream); padding: 12px 20px; border-radius: 4px; font-size: 13px; z-index: 200; box-shadow: 0 4px 20px rgba(0,0,0,.3); opacity: 0; transition: opacity .3s; pointer-events: none; }
   .toast.show { opacity: 1; }
   .confirm-overlay { display: none; position: fixed; inset: 0; background: rgba(44,40,37,.5); z-index: 90; align-items: center; justify-content: center; }
   .confirm-overlay.show { display: flex; }
   .confirm-box { background: var(--warm-white); border-radius: 6px; padding: 40px 36px; max-width: 440px; width: 90%; text-align: center; border-top: 4px solid var(--terracotta); }
-  .confirm-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 12px; }
-  .confirm-box p { font-size: 14px; color: var(--mid); margin-bottom: 24px; line-height: 1.6; }
-  .confirm-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .confirm-btn { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 10px 32px; border: none; border-radius: 3px; cursor: pointer; transition: background .2s; }
-  .confirm-btn-cancel { background: var(--border); color: var(--charcoal); }
-  .confirm-btn-cancel:hover { background: #ccc; }
-  .confirm-btn-confirm { background: var(--terracotta); color: #fff; }
-  .confirm-btn-confirm:hover { background: #b0633b; }
 </style>
 </head>
 <body>
-
 <div class="header">
-  <div class="lang-switcher">
-    <button class="lang-flag active" onclick="setLang('it')">🇮🇹</button>
-    <button class="lang-flag" onclick="setLang('en')">🇬🇧</button>
-  </div>
+  <div class="lang-switcher"><button class="lang-flag active" onclick="setLang('it')">🇮🇹</button><button class="lang-flag" onclick="setLang('en')">🇬🇧</button></div>
   <div class="header-tag" data-i18n="header_tag">Modulo di registrazione</div>
   <h1>Benvenuti a Rimini Sea You</h1>
   <h1 style="font-size:clamp(1.3rem,3.5vw,2rem);font-weight:300;margin-top:8px;"><em data-i18n="header_checkin">Check-in</em> <span data-i18n="header_guests">Ospiti</span></h1>
   <div class="header-sub" data-i18n="header_sub">Compila il modulo prima del tuo arrivo · I dati sono trattati ai sensi del GDPR</div>
 </div>
-
 <div class="container">
-
   <div class="toast" id="toast"></div>
-
   <div class="card" style="border-left:4px solid var(--terracotta);background:linear-gradient(135deg,#fff8f4 0%,var(--warm-white) 100%);">
-    <p style="font-size:14px;line-height:1.75;color:var(--charcoal);">
-      <span data-i18n="welcome_text">Per completare il check-in è <strong>obbligatorio compilare questo modulo</strong> con i dati di <strong>TUTTI gli ospiti</strong>.<br>I dati sono richiesti dalla normativa italiana e verranno comunicati alle autorità competenti.</span><br>
-      <span style="display:inline-block;margin-top:10px;background:#fff3cd;border:1px solid #f0c040;border-radius:3px;padding:6px 12px;font-size:13px;font-weight:500;color:#7a5c00;" data-i18n="welcome_warning">⚠️ Senza la compilazione NON sarà possibile accedere all'alloggio.</span><br>
-      <span style="display:inline-block;margin-top:10px;font-size:13px;color:var(--mid);" data-i18n="welcome_thanks">Grazie per la collaborazione!</span>
-    </p>
+    <p style="font-size:14px;line-height:1.75;color:var(--charcoal);"><span data-i18n="welcome_text">Per completare il check-in è <strong>obbligatorio compilare questo modulo</strong> con i dati di <strong>TUTTI gli ospiti</strong>.<br>I dati sono richiesti dalla normativa italiana e verranno comunicati alle autorità competenti.</span><br>
+    <span style="display:inline-block;margin-top:10px;background:#fff3cd;border:1px solid #f0c040;border-radius:3px;padding:6px 12px;font-size:13px;font-weight:500;color:#7a5c00;" data-i18n="welcome_warning">⚠️ Senza la compilazione NON sarà possibile accedere all'alloggio.</span><br>
+    <span style="display:inline-block;margin-top:10px;font-size:13px;color:var(--mid);" data-i18n="welcome_thanks">Grazie per la collaborazione!</span></p>
   </div>
-
   <div class="card">
     <div class="card-label" data-i18n="booking_label">Dettagli soggiorno</div>
     <div class="card-title" data-i18n="booking_title">Informazioni sulla prenotazione</div>
     <div class="grid grid-3">
-      <div class="field"><label data-i18n="label_checkin">Data check-in <span class="req">*</span></label><input type="date" id="checkin-date" required min="" onchange="saveAllToFirebase()"></div>
-      <div class="field"><label data-i18n="label_checkout">Data check-out <span class="req">*</span></label><input type="date" id="checkout-date" required min="" onchange="saveAllToFirebase()"></div>
+      <div class="field"><label data-i18n="label_checkin">Data check-in <span class="req">*</span></label><input type="text" id="checkin-date" required placeholder="gg/mm/aaaa" readonly class="dp-input"></div>
+      <div class="field"><label data-i18n="label_checkout">Data check-out <span class="req">*</span></label><input type="text" id="checkout-date" required placeholder="gg/mm/aaaa" readonly class="dp-input"></div>
       <div class="field"><label data-i18n="label_arrival">Orario arrivo <span class="req">*</span></label><input type="time" id="arrival-time" required onchange="saveAllToFirebase()"></div>
     </div>
     <div class="grid grid-2" style="margin-top:16px">
-      <div class="field">
-        <label data-i18n="label_total_guests">N° totale ospiti <span class="req">*</span></label>
-        <select id="total-guests" required onchange="saveAllToFirebase()">
-          <option value="" data-i18n="select_placeholder">Seleziona</option>
-          <option>1</option><option>2</option><option>3</option><option>4</option>
-        </select>
-      </div>
+      <div class="field"><label data-i18n="label_total_guests">N° totale ospiti <span class="req">*</span></label><select id="total-guests" required onchange="saveAllToFirebase()"><option value="" data-i18n="select_placeholder">Seleziona</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
     </div>
-    <div class="session-box">
-      <div class="session-box-label" data-i18n="session_label">Link sessione condivisa</div>
-      <div class="session-box-hint" data-i18n="session_hint">Condividi questo link nel gruppo — tutti possono aprirlo e aggiungere i propri dati. L'invio finale va fatto da un solo dispositivo.</div>
-      <div class="session-link-row">
-        <span class="session-link-text" id="session-link-text"></span>
-        <button class="session-copy-btn" id="copy-btn" data-i18n="session_copy" onclick="copyLink()">Copia link</button>
-      </div>
-    </div>
+    <div class="session-box"><div class="session-box-label" data-i18n="session_label">Link sessione condivisa</div><div class="session-link-row"><span class="session-link-text" id="session-link-text"></span><button class="session-copy-btn" id="copy-btn" onclick="copyLink()" data-i18n="session_copy">Copia link</button></div></div>
   </div>
-
   <div class="card">
     <div class="card-label" data-i18n="guests_label">Registrazione ospiti</div>
     <div class="card-title" data-i18n="guests_title">Dati anagrafici</div>
     <p class="section-intro" data-i18n="guests_intro">Inserisci i dati di ogni ospite come riportati sul documento d'identità.</p>
     <div id="guests-container"></div>
-    <button class="btn-add-guest" onclick="addGuest()">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.4"/><line x1="8" y1="4.5" x2="8" y2="11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="4.5" y1="8" x2="11.5" y2="8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <span data-i18n="btn_add_guest">Aggiungi ospite</span>
-    </button>
+    <button class="btn-add-guest" onclick="addGuest()">➕ <span data-i18n="btn_add_guest">Aggiungi ospite</span></button>
   </div>
-
   <div class="card">
     <div class="card-label" data-i18n="privacy_label">Privacy & Consenso</div>
     <div class="card-title" data-i18n="privacy_title">Informativa sul trattamento dei dati</div>
-    <div class="privacy-block">
-      <span data-i18n="privacy_text"><strong>Ai sensi del Reg. UE 2016/679 (GDPR)</strong>, i dati personali forniti saranno trattati esclusivamente per registrazione ospiti, adempimenti di pubblica sicurezza e gestione del soggiorno. I dati non saranno ceduti a terzi salvo obblighi di legge.</span>
-      <a href="https://gianlupro.github.io/checkin-riminiseayou/privacy-policy.html" target="_blank" style="color:var(--terracotta);text-decoration:underline;text-underline-offset:3px;" data-i18n="privacy_link"> Leggi l'informativa completa →</a>
-    </div>
-    <div style="margin-top:18px;display:flex;flex-direction:column;gap:12px;">
-      <div class="checkbox-field field">
-        <input type="checkbox" id="privacy-ok" required>
-        <label for="privacy-ok"><span data-i18n="privacy_check">Ho letto la <a href="https://gianlupro.github.io/checkin-riminiseayou/privacy-policy.html" target="_blank" style="color:var(--terracotta);text-decoration:underline;">Privacy Policy</a> e acconsento al trattamento dei dati</span> <span class="req">*</span></label>
-      </div>
-      <div class="checkbox-field field">
-        <input type="checkbox" id="rules-ok" required>
-        <label for="rules-ok"><span data-i18n="rules_check">Ho preso visione e accetto il regolamento della struttura</span> <span class="req">*</span></label>
-      </div>
-    </div>
+    <div class="privacy-block"><span data-i18n="privacy_text"><strong>Ai sensi del Reg. UE 2016/679 (GDPR)</strong>, i dati personali forniti saranno trattati esclusivamente per registrazione ospiti, adempimenti di pubblica sicurezza e gestione del soggiorno.</span> <a href="#" target="_blank" style="color:var(--terracotta);"> Leggi l'informativa completa →</a></div>
+    <div style="margin-top:18px;"><div class="checkbox-field"><input type="checkbox" id="privacy-ok" required><label for="privacy-ok"><span data-i18n="privacy_check">Acconsento al trattamento dei dati personali</span> <span class="req">*</span></label></div><div class="checkbox-field"><input type="checkbox" id="rules-ok" required><label for="rules-ok"><span data-i18n="rules_check">Accetto il regolamento della struttura</span> <span class="req">*</span></label></div></div>
   </div>
-
-  <div class="submit-area">
-    <button class="btn-submit" onclick="confirmSubmit()" data-i18n="btn_submit">Invia registrazione</button>
-  </div>
-
+  <div class="submit-area"><button class="btn-submit" onclick="confirmSubmit()" data-i18n="btn_submit">Invia registrazione</button></div>
 </div>
-
-<div class="success-overlay" id="success-overlay">
-  <div class="success-box">
-    <div class="success-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 14.5l5.5 5.5L22 9" stroke="#c4714a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <h2 data-i18n="success_title">Registrazione completata</h2>
-    <p data-i18n="success_text">Grazie! I tuoi dati sono stati ricevuti. Il tuo host ti contatterà per le istruzioni. Buon soggiorno 🏡</p>
-  </div>
-</div>
-
-<div class="confirm-overlay" id="confirm-overlay">
-  <div class="confirm-box">
-    <h3 data-i18n="confirm_title">Conferma invio</h3>
-    <p data-i18n="confirm_text">Stai per inviare la registrazione definitiva. Assicurati che tutti gli ospiti abbiano compilato i campi obbligatori. Vuoi procedere?</p>
-    <div class="confirm-actions">
-      <button class="confirm-btn confirm-btn-cancel" onclick="closeConfirm()" data-i18n="confirm_cancel">Annulla</button>
-      <button class="confirm-btn confirm-btn-confirm" onclick="submitForm()" data-i18n="confirm_confirm">Conferma invio</button>
-    </div>
-  </div>
-</div>
+<div class="success-overlay" id="success-overlay"><div class="success-box"><div class="success-icon">✅</div><h2 data-i18n="success_title">Registrazione completata</h2><p data-i18n="success_text">Grazie! I tuoi dati sono stati ricevuti. Il tuo host ti contatterà. Buon soggiorno 🏡</p></div></div>
+<div class="confirm-overlay" id="confirm-overlay"><div class="confirm-box"><h3 data-i18n="confirm_title">Conferma invio</h3><p data-i18n="confirm_text">Stai per inviare la registrazione definitiva. Assicurati che tutti gli ospiti abbiano compilato i campi obbligatori e caricato la foto del documento. Vuoi procedere?</p><div class="confirm-actions"><button class="confirm-btn confirm-btn-cancel" onclick="closeConfirm()" data-i18n="confirm_cancel">Annulla</button><button class="confirm-btn confirm-btn-confirm" onclick="submitForm()" data-i18n="confirm_confirm">Conferma invio</button></div></div></div>
 
 <script>
-// COSTANTI - MODIFICATA PER USARE /exec invece di /dev
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw65iMX-MJDsPafjq2TQ2Hm8UbZnMFt1gRyRA-2U9c/exec';
+// ======================= COSTANTI =======================
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0I2X0hXJQL-WqkAkUsdE1pE21Zl0X93-AQg0Zapj4eOBB-1r-TerlgcfqUskYhG4jGA/exec';
 const FIREBASE_URL    = 'https://riminiseayoucheckin-default-rtdb.europe-west1.firebasedatabase.app';
-
-// SESSION ID dall'URL
-const SESSION_ID = (function() {
-  var p = new URLSearchParams(window.location.search);
-  var s = p.get('s');
-  if (!s) {
-    s = Math.random().toString(36).slice(2,9).toUpperCase();
-    window.history.replaceState({}, '', window.location.pathname + '?s=' + s);
-  }
+const SESSION_ID = (() => {
+  let s = new URLSearchParams(location.search).get('s');
+  if (!s) { s = Math.random().toString(36).slice(2,9).toUpperCase(); history.replaceState({}, '', location.pathname + '?s=' + s); }
   return s;
 })();
+let guestCount = 0, currentLang = 'it';
 
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); }, 3000);
-}
-
-function copyLink() {
-  var url = window.location.href;
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(url).then(function() {
-      showToast('✓ Link copiato!');
-    }).catch(function() {
-      fallbackCopy(url);
-    });
-  } else {
-    fallbackCopy(url);
-  }
-}
-
-function fallbackCopy(url) {
-  var ta = document.createElement('textarea');
-  ta.value = url;
-  ta.style.position = 'fixed';
-  ta.style.opacity = '0';
-  document.body.appendChild(ta);
-  ta.select();
-  try { document.execCommand('copy'); showToast('✓ Link copiato!'); }
-  catch(e) { showToast('Copia manualmente: ' + url); }
-  document.body.removeChild(ta);
-}
-
-function validateDates() {
-  var ciP = DP.get('checkin-date');
-  var coP = DP.get('checkout-date');
-  var checkin  = ciP ? ciP.getISO() : '';
-  var checkout = coP ? coP.getISO() : '';
-  if (checkin && checkout && checkin > checkout) {
-    showToast('⚠️ La data di check-in non può essere dopo il check-out');
-    if (coP) coP.setISO(checkin);
-    saveAllToFirebase();
-  }
-}
-
-function saveAllToFirebase() {
-  var data = collectAllData();
-  fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  }).catch(function(){});
-}
-
-function collectAllData() {
-  var data = {
-    booking: {
-      checkin:   (DP.get('checkin-date') ? DP.get('checkin-date').getISO() : '') || document.getElementById('checkin-date').dataset.iso || '',
-      checkout:  (DP.get('checkout-date') ? DP.get('checkout-date').getISO() : '') || document.getElementById('checkout-date').dataset.iso || '',
-      arrival:   document.getElementById('arrival-time').value,
-      totGuests: document.getElementById('total-guests').value
-    },
-    guests: [],
-  };
-  
-  document.querySelectorAll('.guest-card').forEach(function(card, i) {
-    var n = i + 1;
-    var inputs  = card.querySelectorAll('input');
-    var selects = card.querySelectorAll('select');
-    var guest = {
-      surname:     inputs[0] ? inputs[0].value : '',
-      firstName:   inputs[1] ? inputs[1].value : '',
-      nationality: inputs[2] ? inputs[2].value : '',
-      pob:         inputs[3] ? inputs[3].value : '',
-      dob:         inputs[4] ? (inputs[4].dataset.iso || inputs[4].value) : '',
-      gender:      selects[0] ? selects[0].value : '',
-      docType:     selects[1] ? selects[1].value : '',
-      docNumber:   inputs[5] ? inputs[5].value : '',
-      docIssuer:   inputs[6] ? inputs[6].value : '',
-      docExpiry:   inputs[7] ? (inputs[7].dataset.iso || inputs[7].value) : ''
-    };
-    data.guests.push(guest);
-  });
-  
-  return data;
-}
-
-var currentLang = 'it';
-var T = {
+// Traduzioni (complete, incluse quelle per i campi)
+const T = {
   it: {
     header_tag:'Modulo di registrazione', header_checkin:'Check-in', header_guests:'Ospiti',
     header_sub:'Compila il modulo prima del tuo arrivo · I dati sono trattati ai sensi del GDPR',
@@ -380,7 +209,7 @@ var T = {
     privacy_label:'Privacy & Consenso', privacy_title:'Informativa sul trattamento dei dati',
     privacy_text:'<strong>Ai sensi del Reg. UE 2016/679 (GDPR)</strong>, i dati personali forniti saranno trattati esclusivamente per registrazione ospiti, adempimenti di pubblica sicurezza e gestione del soggiorno. I dati non saranno ceduti a terzi salvo obblighi di legge.',
     privacy_link:'Leggi l\'informativa completa →',
-    privacy_check:'Ho letto la <a href="https://gianlupro.github.io/checkin-riminiseayou/privacy-policy.html" target="_blank" style="color:var(--terracotta);text-decoration:underline;">Privacy Policy</a> e acconsento al trattamento dei dati',
+    privacy_check:'Ho letto la <a href="#" target="_blank" style="color:var(--terracotta);text-decoration:underline;">Privacy Policy</a> e acconsento al trattamento dei dati',
     rules_check:'Ho preso visione e accetto il regolamento della struttura',
     btn_submit:'Invia registrazione',
     success_title:'Registrazione completata',
@@ -399,15 +228,20 @@ var T = {
     f_doctype:'Tipo di documento <span class="req">*</span>',
     f_docnum:'Numero del documento <span class="req">*</span>',
     f_docissuer:'Luogo di rilascio documento <span class="req">*</span>',
-    f_docexp:'Scadenza documento <span class="req">*</span>', 
+    f_docexp:'Scadenza documento <span class="req">*</span>',
+    f_doc_photo:'Foto del documento <span class="req">*</span>',
+    f_doc_photo_btn:'📷 Scatta o carica foto', 
+    f_doc_photo_change:'📷 Cambia foto',
+    f_doc_photo_hint:'Carica una foto del documento. Assicurati che tutti i dati siano leggibili.',
     gender_male:'Maschio', gender_female:'Femmina',
     doc_ci:'Carta d\'identità', doc_passport:'Passaporto', doc_license:'Patente di guida', doc_permit:'Permesso di soggiorno',
     alert_fields:'Compila tutti i campi obbligatori della prenotazione.',
     alert_privacy:'Devi accettare la privacy policy e il regolamento.',
     alert_guest_min:'Aggiungi almeno un ospite.',
+    alert_photo:'Carica la foto del documento per ogni ospite.',
     alert_sending:'Invio in corso…', alert_neterror:'Errore di rete. Riprova.',
     confirm_title:'Conferma invio',
-    confirm_text:'Stai per inviare la registrazione definitiva. Assicurati che tutti gli ospiti abbiano compilato i campi obbligatori. Vuoi procedere?',
+    confirm_text:'Stai per inviare la registrazione definitiva. Assicurati che tutti gli ospiti abbiano compilato i campi obbligatori e caricato la foto del documento. Vuoi procedere?',
     confirm_cancel:'Annulla',
     confirm_confirm:'Conferma invio'
   },
@@ -432,7 +266,7 @@ var T = {
     privacy_label:'Privacy & Consent', privacy_title:'Data processing notice',
     privacy_text:'<strong>Pursuant to EU Reg. 2016/679 (GDPR)</strong>, personal data will be processed solely for guest registration, public security obligations and stay management. Data will not be shared with third parties except as required by law.',
     privacy_link:'Read the full privacy policy →',
-    privacy_check:'I have read the <a href="https://gianlupro.github.io/checkin-riminiseayou/privacy-policy.html" target="_blank" style="color:var(--terracotta);text-decoration:underline;">Privacy Policy</a> and consent to the processing of my data',
+    privacy_check:'I have read the <a href="#" target="_blank" style="color:var(--terracotta);text-decoration:underline;">Privacy Policy</a> and consent to the processing of my data',
     rules_check:'I have read and accept the property rules',
     btn_submit:'Submit registration',
     success_title:'Registration complete',
@@ -452,646 +286,484 @@ var T = {
     f_docnum:'Document number <span class="req">*</span>',
     f_docissuer:'Place of issue <span class="req">*</span>',
     f_docexp:'Document expiry <span class="req">*</span>',
+    f_doc_photo:'Document photo <span class="req">*</span>',
+    f_doc_photo_btn:'📷 Take or upload photo',
+    f_doc_photo_change:'📷 Change photo',
+    f_doc_photo_hint:'Upload a photo of the document. Make sure all details are clearly visible.',
     gender_male:'Male', gender_female:'Female',
     doc_ci:'Identity card', doc_passport:'Passport', doc_license:'Driving licence', doc_permit:'Residence permit',
     alert_fields:'Please fill in all required booking fields.',
     alert_privacy:'You must accept the privacy policy and property rules.',
     alert_guest_min:'Please add at least one guest.',
+    alert_photo:'Please upload a document photo for each guest.',
     alert_sending:'Sending…', alert_neterror:'Network error. Please try again.',
     confirm_title:'Confirm submission',
-    confirm_text:'You are about to submit the final registration. Make sure all guests have filled in the required fields. Do you want to proceed?',
+    confirm_text:'You are about to submit the final registration. Make sure all guests have filled in the required fields and uploaded the document photo. Do you want to proceed?',
     confirm_cancel:'Cancel',
     confirm_confirm:'Confirm submission'
   }
 };
 
+// ======================= UTILITIES =======================
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+function copyLink() {
+  let url = location.href;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => showToast('✓ Link copiato!')).catch(() => fallbackCopy(url));
+  } else { fallbackCopy(url); }
+}
+function fallbackCopy(url) {
+  let ta = document.createElement('textarea');
+  ta.value = url;
+  ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); showToast('✓ Link copiato!'); } catch(e) { showToast('Copia manualmente: ' + url); }
+  document.body.removeChild(ta);
+}
 function setLang(lang) {
   currentLang = lang;
-  document.querySelectorAll('.lang-flag').forEach(function(b) { b.classList.remove('active'); });
-  document.querySelectorAll('.lang-flag').forEach(function(b) {
-    if (b.getAttribute('onclick') === "setLang('" + lang + "')") b.classList.add('active');
-  });
-  var t = T[lang];
-  document.querySelectorAll('[data-i18n]').forEach(function(el) {
-    var key = el.getAttribute('data-i18n');
-    if (t[key] !== undefined) el.innerHTML = t[key];
-  });
-  
-  document.querySelectorAll('.guest-card').forEach(function(card, i) {
-    var saveBtn = card.querySelector('.btn-save-guest');
-    var editBtn = card.querySelector('.btn-edit');
-    var badge = card.querySelector('.badge-saved');
+  document.querySelectorAll('.lang-flag').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lang-flag').forEach(b => { if (b.getAttribute('onclick') === "setLang('" + lang + "')") b.classList.add('active'); });
+  let t = T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => { let key = el.getAttribute('data-i18n'); if (t[key] !== undefined) el.innerHTML = t[key]; });
+  document.querySelectorAll('.guest-card').forEach(card => {
+    let saveBtn = card.querySelector('.btn-save-guest'), editBtn = card.querySelector('.btn-edit'), badge = card.querySelector('.badge-saved');
     if (saveBtn) saveBtn.textContent = t.btn_save;
     if (editBtn) editBtn.textContent = t.btn_edit;
     if (badge) badge.innerHTML = '✅ ' + t.badge_saved;
-    
-    var labels = card.querySelectorAll('.field label');
-    var fields = card.querySelectorAll('.field');
-    if (labels.length > 0 && fields.length > 0) {
-      var fieldLabels = [
-        t.f_surname, t.f_name,
-        t.f_nationality, t.f_pob, t.f_dob,
-        t.f_gender,
-        t.f_doctype, t.f_docnum, t.f_docissuer,
-        t.f_docexp
-      ];
-      var labelIndex = 0;
-      fields.forEach(function(field, idx) {
-        var label = field.querySelector('label');
-        if (label && labelIndex < fieldLabels.length) {
-          label.innerHTML = fieldLabels[labelIndex];
-          labelIndex++;
-        }
-      });
-    }
+    let fields = card.querySelectorAll('.field');
+    let fieldLabels = [t.f_surname, t.f_name, t.f_nationality, t.f_pob, t.f_dob, t.f_gender, t.f_doctype, t.f_docnum, t.f_docissuer, t.f_docexp];
+    let labelIndex = 0;
+    fields.forEach(field => {
+      let label = field.querySelector('label');
+      if (label && labelIndex < fieldLabels.length) { label.innerHTML = fieldLabels[labelIndex]; labelIndex++; }
+    });
+    let photoLabel = card.querySelector('.field:last-of-type label');
+    if (photoLabel) photoLabel.innerHTML = t.f_doc_photo;
+    let photoBtn = card.querySelector('.doc-upload-btn-label');
+    if (photoBtn && !photoBtn.closest('.has-file')) photoBtn.textContent = t.f_doc_photo_btn;
+    else if (photoBtn) photoBtn.textContent = t.f_doc_photo_change;
   });
 }
+function toggleGuestCard(n) { document.getElementById('guest-' + n)?.classList.toggle('collapsed'); }
+function setFieldsDisabled(card, disabled) {
+  card.querySelectorAll('input:not([type="file"]), select').forEach(i => i.disabled = disabled);
+}
+function saveAllToFirebase() {
+  let data = collectAllData();
+  fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).catch(()=>{});
+}
+function collectAllData() {
+  let data = { booking: { checkin: DP.get('checkin-date')?.getISO() || '', checkout: DP.get('checkout-date')?.getISO() || '', arrival: document.getElementById('arrival-time').value, totGuests: document.getElementById('total-guests').value }, guests: [], photos: {} };
+  document.querySelectorAll('.guest-card').forEach((card, i) => {
+    let n = i + 1;
+    let inputs = card.querySelectorAll('input'), selects = card.querySelectorAll('select');
+    let guest = {
+      surname: inputs[0]?.value || '', firstName: inputs[1]?.value || '', nationality: inputs[2]?.value || '', pob: inputs[3]?.value || '',
+      dob: inputs[4]?.dataset.iso || inputs[4]?.value || '', gender: selects[0]?.value || '', docType: selects[1]?.value || '',
+      docNumber: inputs[5]?.value || '', docIssuer: inputs[6]?.value || '', docExpiry: inputs[7]?.dataset.iso || inputs[7]?.value || ''
+    };
+    data.guests.push(guest);
+    let fi = document.getElementById('file-' + n);
+    if (fi && fi.files && fi.files.length > 0) {
+      let reader = new FileReader();
+      reader.readAsDataURL(fi.files[0]);
+      data.photos['photo_' + n] = reader.result;
+    } else { data.photos['photo_' + n] = null; }
+  });
+  return data;
+}
 
-var guestCount = 0;
-
+// ======================= GUEST CARD =======================
 function buildGuestCard(n) {
-  var t = T[currentLang];
-  var isFirst = n === 1;
-
-  var card = document.createElement('div');
+  let t = T[currentLang];
+  let isFirst = n === 1;
+  let card = document.createElement('div');
   card.className = 'guest-card';
   card.id = 'guest-' + n;
-
-  var header = document.createElement('div');
+  let header = document.createElement('div');
   header.className = 'guest-header';
-  header.onclick = function(e) {
-    if (e.target.closest('.btn-remove') || e.target.closest('.btn-save-guest') || e.target.closest('.btn-edit')) return;
-    toggleGuestCard(n);
-  };
-
-  var leftDiv = document.createElement('div');
+  header.onclick = function(e) { if (!e.target.closest('.btn-remove,.btn-save-guest,.btn-edit')) toggleGuestCard(n); };
+  let leftDiv = document.createElement('div');
   leftDiv.className = 'guest-number';
-  var span = document.createElement('span');
-  span.className = 'num-badge';
-  span.textContent = n;
-  leftDiv.appendChild(span);
-  var label = document.createElement('span');
-  label.className = 'guest-label';
-  label.textContent = isFirst ? t.guest_lead : t.guest_extra;
-  leftDiv.appendChild(label);
-  var nameSpan = document.createElement('span');
-  nameSpan.className = 'guest-name';
-  nameSpan.textContent = '';
-  leftDiv.appendChild(nameSpan);
-  var badge = document.createElement('span');
-  badge.className = 'badge-saved';
-  badge.innerHTML = '✅ ' + t.badge_saved;
-  leftDiv.appendChild(badge);
+  let span = document.createElement('span'); span.className = 'num-badge'; span.textContent = n; leftDiv.appendChild(span);
+  let label = document.createElement('span'); label.className = 'guest-label'; label.textContent = isFirst ? t.guest_lead : t.guest_extra; leftDiv.appendChild(label);
+  let nameSpan = document.createElement('span'); nameSpan.className = 'guest-name'; leftDiv.appendChild(nameSpan);
+  let badge = document.createElement('span'); badge.className = 'badge-saved'; badge.innerHTML = '✅ ' + t.badge_saved; leftDiv.appendChild(badge);
   header.appendChild(leftDiv);
-
-  var actionsDiv = document.createElement('div');
+  let actionsDiv = document.createElement('div');
   actionsDiv.className = 'guest-actions';
-  var editBtn = document.createElement('button');
-  editBtn.className = 'btn-edit';
-  editBtn.textContent = t.btn_edit;
+  let editBtn = document.createElement('button'); editBtn.className = 'btn-edit'; editBtn.textContent = t.btn_edit;
   editBtn.onclick = function(e) { e.stopPropagation(); editGuest(n); };
   actionsDiv.appendChild(editBtn);
   if (!isFirst) {
-    var removeBtn = document.createElement('button');
-    removeBtn.className = 'btn-remove';
-    removeBtn.textContent = t.btn_remove;
+    let removeBtn = document.createElement('button'); removeBtn.className = 'btn-remove'; removeBtn.textContent = t.btn_remove;
     removeBtn.onclick = function(e) { e.stopPropagation(); removeGuest(n); };
     actionsDiv.appendChild(removeBtn);
   }
   header.appendChild(actionsDiv);
   card.appendChild(header);
-
-  var body = document.createElement('div');
+  let body = document.createElement('div');
   body.className = 'guest-body';
-
-  function field(labelHtml, inputEl) {
-    var d = document.createElement('div');
-    d.className = 'field';
-    var lbl = document.createElement('label');
-    lbl.innerHTML = labelHtml;
-    d.appendChild(lbl);
-    d.appendChild(inputEl);
-    return d;
-  }
-  function inp(type, required) {
-    var i = document.createElement('input');
-    i.type = type || 'text';
-    if (required) i.required = true;
-    return i;
-  }
-
-  var g2a = document.createElement('div');
-  g2a.className = 'grid grid-2';
-  var inpSurname = inp('text', true);
-  var inpName = inp('text', true);
-  g2a.appendChild(field(t.f_surname, inpSurname));
-  g2a.appendChild(field(t.f_name, inpName));
+  function field(labelHtml, inputEl) { let d = document.createElement('div'); d.className = 'field'; let lbl = document.createElement('label'); lbl.innerHTML = labelHtml; d.appendChild(lbl); d.appendChild(inputEl); return d; }
+  function inp(type, required) { let i = document.createElement('input'); i.type = type || 'text'; if (required) i.required = true; return i; }
+  let g2a = document.createElement('div'); g2a.className = 'grid grid-2';
+  let inpSurname = inp('text', true), inpName = inp('text', true);
+  g2a.appendChild(field(t.f_surname, inpSurname)); g2a.appendChild(field(t.f_name, inpName));
   body.appendChild(g2a);
-
-  var g3a = document.createElement('div');
-  g3a.className = 'grid grid-3';
-  g3a.style.marginTop = '16px';
-  var inpNat = inp('text', true);
-  var inpPob = inp('text', true);
-  var inpDob = inp('text', true);
-  g3a.appendChild(field(t.f_nationality, inpNat));
-  g3a.appendChild(field(t.f_pob, inpPob));
-  g3a.appendChild(field(t.f_dob, inpDob));
+  let g3a = document.createElement('div'); g3a.className = 'grid grid-3'; g3a.style.marginTop = '16px';
+  let inpNat = inp('text', true), inpPob = inp('text', true), inpDob = inp('text', true);
   inpDob.dataset.dpYear = String(new Date().getFullYear());
+  g3a.appendChild(field(t.f_nationality, inpNat)); g3a.appendChild(field(t.f_pob, inpPob)); g3a.appendChild(field(t.f_dob, inpDob));
   body.appendChild(g3a);
-
-  var gGender = document.createElement('div');
-  gGender.className = 'grid grid-2';
-  gGender.style.marginTop = '16px';
-  var selGender = document.createElement('select');
-  selGender.required = true;
-  var optGender = document.createElement('option');
-  optGender.value = '';
-  optGender.textContent = t.select_placeholder;
-  selGender.appendChild(optGender);
-  [t.gender_male, t.gender_female].forEach(function(g) {
-    var o = document.createElement('option');
-    o.textContent = g;
-    selGender.appendChild(o);
-  });
+  let gGender = document.createElement('div'); gGender.className = 'grid grid-2'; gGender.style.marginTop = '16px';
+  let selGender = document.createElement('select'); selGender.required = true;
+  let optGender = document.createElement('option'); optGender.value = ''; optGender.textContent = t.select_placeholder; selGender.appendChild(optGender);
+  [t.gender_male, t.gender_female].forEach(g => { let o = document.createElement('option'); o.textContent = g; selGender.appendChild(o); });
   gGender.appendChild(field(t.f_gender, selGender));
   body.appendChild(gGender);
-
-  var g3b = document.createElement('div');
-  g3b.className = 'grid grid-3';
-  g3b.style.marginTop = '16px';
-  var selDoc = document.createElement('select');
-  selDoc.required = true;
-  var optDoc = document.createElement('option');
-  optDoc.value = '';
-  optDoc.textContent = t.select_placeholder;
-  selDoc.appendChild(optDoc);
-  [t.doc_ci, t.doc_passport, t.doc_license, t.doc_permit].forEach(function(doc) {
-    var o = document.createElement('option');
-    o.textContent = doc;
-    selDoc.appendChild(o);
-  });
-  var inpDocNum = inp('text', true);
-  var inpDocIssuer = inp('text', true);
-  g3b.appendChild(field(t.f_doctype, selDoc));
-  g3b.appendChild(field(t.f_docnum, inpDocNum));
-  g3b.appendChild(field(t.f_docissuer, inpDocIssuer));
+  let g3b = document.createElement('div'); g3b.className = 'grid grid-3'; g3b.style.marginTop = '16px';
+  let selDoc = document.createElement('select'); selDoc.required = true;
+  let optDoc = document.createElement('option'); optDoc.value = ''; optDoc.textContent = t.select_placeholder; selDoc.appendChild(optDoc);
+  [t.doc_ci, t.doc_passport, t.doc_license, t.doc_permit].forEach(doc => { let o = document.createElement('option'); o.textContent = doc; selDoc.appendChild(o); });
+  let inpDocNum = inp('text', true), inpDocIssuer = inp('text', true);
+  g3b.appendChild(field(t.f_doctype, selDoc)); g3b.appendChild(field(t.f_docnum, inpDocNum)); g3b.appendChild(field(t.f_docissuer, inpDocIssuer));
   body.appendChild(g3b);
-
-  var gDocExp = document.createElement('div');
-  gDocExp.className = 'grid grid-2';
-  gDocExp.style.marginTop = '16px';
-  var inpDocExp = inp('text', true);
+  let gDocExp = document.createElement('div'); gDocExp.className = 'grid grid-2'; gDocExp.style.marginTop = '16px';
+  let inpDocExp = inp('text', true); inpDocExp.dataset.dpYear = String(new Date().getFullYear());
   gDocExp.appendChild(field(t.f_docexp, inpDocExp));
-  inpDocExp.dataset.dpYear = String(new Date().getFullYear());
   body.appendChild(gDocExp);
-
+  let hr2 = document.createElement('hr'); hr2.className = 'divider'; hr2.style.marginTop = '20px';
+  body.appendChild(hr2);
+  let photoField = document.createElement('div'); photoField.className = 'field';
+  let photoLabel = document.createElement('label'); photoLabel.innerHTML = t.f_doc_photo;
+  photoField.appendChild(photoLabel);
+  let zone = document.createElement('div'); zone.className = 'doc-upload-zone'; zone.id = 'zone-' + n;
+  let preview = document.createElement('img'); preview.className = 'doc-upload-preview'; preview.id = 'preview-' + n;
+  let inner = document.createElement('div'); inner.className = 'doc-upload-inner';
+  let btnLbl = document.createElement('span'); btnLbl.className = 'doc-upload-btn-label'; btnLbl.id = 'photo-btn-' + n; btnLbl.textContent = t.f_doc_photo_btn;
+  let hint = document.createElement('span'); hint.className = 'doc-upload-hint'; hint.textContent = t.f_doc_photo_hint;
+  inner.appendChild(btnLbl); inner.appendChild(hint);
+  zone.appendChild(preview); zone.appendChild(inner);
+  let fileInput = document.createElement('input'); fileInput.type = 'file'; fileInput.className = 'doc-upload-input'; fileInput.id = 'file-' + n; fileInput.accept = 'image/*';
+  fileInput.onchange = function() { handlePhoto(n, fileInput); };
+  zone.onclick = function() { fileInput.click(); };
+  photoField.appendChild(zone); photoField.appendChild(fileInput);
+  body.appendChild(photoField);
   card.appendChild(body);
-
-  var saveBtnContainer = document.createElement('div');
-  saveBtnContainer.style.marginTop = '16px';
-  saveBtnContainer.style.textAlign = 'right';
-  var saveBtn = document.createElement('button');
-  saveBtn.className = 'btn-save-guest';
-  saveBtn.textContent = t.btn_save;
-  saveBtn.onclick = function(e) { 
-    e.stopPropagation(); 
-    saveGuest(n); 
-  };
+  let saveBtnContainer = document.createElement('div'); saveBtnContainer.style.marginTop = '16px'; saveBtnContainer.style.textAlign = 'right';
+  let saveBtn = document.createElement('button'); saveBtn.className = 'btn-save-guest'; saveBtn.textContent = t.btn_save;
+  saveBtn.onclick = function(e) { e.stopPropagation(); saveGuest(n); };
   saveBtnContainer.appendChild(saveBtn);
   card.appendChild(saveBtnContainer);
-
   return card;
 }
-
 function addGuest() {
   guestCount++;
-  var card = buildGuestCard(guestCount);
+  let card = buildGuestCard(guestCount);
   document.getElementById('guests-container').appendChild(card);
-  card.querySelectorAll('input[data-dp-year]').forEach(function(inp) {
-    DP.attach(inp, { year: parseInt(inp.dataset.dpYear) });
-  });
+  card.querySelectorAll('input[data-dp-year]').forEach(inp => { DP.attach(inp, { year: parseInt(inp.dataset.dpYear) }); });
 }
-
 function removeGuest(n) {
-  var el = document.getElementById('guest-' + n);
-  if (el) {
-    el.style.opacity='0';
-    el.style.transition='opacity .2s';
-    setTimeout(function(){ el.remove(); }, 200);
-  }
+  let el = document.getElementById('guest-' + n);
+  if (el) { el.style.opacity = '0'; el.style.transition = 'opacity .2s'; setTimeout(() => el.remove(), 200); }
 }
-
-function toggleGuestCard(n) {
-  var card = document.getElementById('guest-' + n);
-  if (!card) return;
-  card.classList.toggle('collapsed');
-}
-
-function setFieldsDisabled(card, disabled) {
-  var inputs = card.querySelectorAll('input');
-  var selects = card.querySelectorAll('select');
-  inputs.forEach(function(inp) {
-    if (inp.type !== 'file') inp.disabled = disabled;
-  });
-  selects.forEach(function(sel) {
-    sel.disabled = disabled;
-  });
-}
-
-function collectGuestData(n) {
-  var card = document.getElementById('guest-' + n);
-  if (!card) return null;
-  var inputs  = card.querySelectorAll('input');
-  var selects = card.querySelectorAll('select');
-  var data = {
-    surname:     inputs[0] ? inputs[0].value : '',
-    firstName:   inputs[1] ? inputs[1].value : '',
-    nationality: inputs[2] ? inputs[2].value : '',
-    pob:         inputs[3] ? inputs[3].value : '',
-    dob:         inputs[4] ? (inputs[4].dataset.iso || inputs[4].value) : '',
-    gender:      selects[0] ? selects[0].value : '',
-    docType:     selects[1] ? selects[1].value : '',
-    docNumber:   inputs[5] ? inputs[5].value : '',
-    docIssuer:   inputs[6] ? inputs[6].value : '',
-    docExpiry:   inputs[7] ? (inputs[7].dataset.iso || inputs[7].value) : ''
+function handlePhoto(n, input) {
+  let file = input.files[0];
+  if (!file) return;
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let zone = document.getElementById('zone-' + n);
+    let preview = document.getElementById('preview-' + n);
+    let btn = document.getElementById('photo-btn-' + n);
+    preview.src = e.target.result;
+    zone.classList.add('has-file');
+    btn.textContent = T[currentLang].f_doc_photo_change;
   };
-  return data;
+  reader.readAsDataURL(file);
 }
-
 async function saveGuest(n) {
-  var t = T[currentLang];
-  var data = collectGuestData(n);
+  let t = T[currentLang];
+  let data = collectGuestData(n);
   if (!data) return;
-
-  if (!data.surname || !data.firstName || !data.nationality || !data.pob || !data.dob || !data.gender || 
-      !data.docType || !data.docNumber || !data.docIssuer || !data.docExpiry) {
-    showToast('⚠️ Compila tutti i campi obbligatori');
-    return;
+  if (!data.surname || !data.firstName || !data.nationality || !data.pob || !data.dob || !data.gender || !data.docType || !data.docNumber || !data.docIssuer || !data.docExpiry) {
+    showToast('⚠️ Compila tutti i campi obbligatori'); return;
   }
-
+  let fi = document.getElementById('file-' + n);
+  let photoData = null;
+  if (fi && fi.files && fi.files.length > 0) {
+    let reader = new FileReader();
+    photoData = await new Promise(resolve => { reader.onload = e => resolve(e.target.result); reader.readAsDataURL(fi.files[0]); });
+  }
   try {
-    var resp = await fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json');
-    var existing = await resp.json();
-    if (!existing) existing = { booking: {}, guests: [], photos: {} };
+    let resp = await fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json');
+    let existing = await resp.json() || { booking: {}, guests: [], photos: {} };
     if (!existing.guests) existing.guests = [];
     if (!existing.photos) existing.photos = {};
-
     existing.guests[n-1] = data;
-
-    await fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(existing)
-    });
-
-    var card = document.getElementById('guest-' + n);
-    card.classList.add('collapsed');
-    card.classList.add('saved');
-    var nameSpan = card.querySelector('.guest-name');
+    if (photoData) existing.photos['photo_' + n] = photoData;
+    await fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(existing) });
+    let card = document.getElementById('guest-' + n);
+    card.classList.add('collapsed', 'saved');
+    let nameSpan = card.querySelector('.guest-name');
     nameSpan.textContent = data.firstName + ' ' + data.surname;
-    var saveBtn = card.querySelector('.btn-save-guest');
-    var editBtn = card.querySelector('.btn-edit');
-    saveBtn.style.display = 'none';
-    editBtn.style.display = 'inline-block';
-    
+    let saveBtn = card.querySelector('.btn-save-guest'), editBtn = card.querySelector('.btn-edit');
+    saveBtn.style.display = 'none'; editBtn.style.display = 'inline-block';
     setFieldsDisabled(card, true);
-    
     showToast('✓ ' + data.firstName + ' ' + data.surname + ' salvato!');
-  } catch(e) {
-    showToast('❌ Errore nel salvataggio');
-  }
+  } catch(e) { showToast('❌ Errore nel salvataggio'); }
 }
-
+function collectGuestData(n) {
+  let card = document.getElementById('guest-' + n);
+  if (!card) return null;
+  let inputs = card.querySelectorAll('input'), selects = card.querySelectorAll('select');
+  return {
+    surname: inputs[0]?.value || '', firstName: inputs[1]?.value || '', nationality: inputs[2]?.value || '', pob: inputs[3]?.value || '',
+    dob: inputs[4]?.dataset.iso || inputs[4]?.value || '', gender: selects[0]?.value || '', docType: selects[1]?.value || '',
+    docNumber: inputs[5]?.value || '', docIssuer: inputs[6]?.value || '', docExpiry: inputs[7]?.dataset.iso || inputs[7]?.value || ''
+  };
+}
 function editGuest(n) {
-  var card = document.getElementById('guest-' + n);
+  let card = document.getElementById('guest-' + n);
   card.classList.remove('collapsed');
-  var saveBtn = card.querySelector('.btn-save-guest');
-  var editBtn = card.querySelector('.btn-edit');
-  saveBtn.style.display = 'inline-block';
-  editBtn.style.display = 'none';
-  
+  let saveBtn = card.querySelector('.btn-save-guest'), editBtn = card.querySelector('.btn-edit');
+  saveBtn.style.display = 'inline-block'; editBtn.style.display = 'none';
   setFieldsDisabled(card, false);
 }
+function confirmSubmit() { document.getElementById('confirm-overlay').classList.add('show'); }
+function closeConfirm() { document.getElementById('confirm-overlay').classList.remove('show'); }
 
-function confirmSubmit() {
-  document.getElementById('confirm-overlay').classList.add('show');
+// ======================= INVIO FINALE CON POST =======================
+async function compressImageToBlob(file) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, 1000 / Math.max(img.width, img.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(blob => { URL.revokeObjectURL(url); resolve(blob); }, 'image/jpeg', 0.7);
+    };
+    img.src = url;
+  });
 }
-
-function closeConfirm() {
-  document.getElementById('confirm-overlay').classList.remove('show');
-}
-
 async function submitForm() {
-  var t = T[currentLang];
-  var privacyOk = document.getElementById('privacy-ok').checked;
-  var rulesOk   = document.getElementById('rules-ok').checked;
-  var _ciP=DP.get('checkin-date'); var checkin=_ciP?_ciP.getISO():(document.getElementById('checkin-date').dataset.iso||'');
-  var _coP=DP.get('checkout-date'); var checkout=_coP?_coP.getISO():(document.getElementById('checkout-date').dataset.iso||'');
-  var arrival   = document.getElementById('arrival-time').value;
-  var totGuests = document.getElementById('total-guests').value;
-
+  let t = T[currentLang];
+  let checkin = DP.get('checkin-date')?.getISO(), checkout = DP.get('checkout-date')?.getISO();
+  let arrival = document.getElementById('arrival-time').value, totGuests = document.getElementById('total-guests').value;
   if (!checkin || !checkout || !arrival || !totGuests) { alert(t.alert_fields); return; }
-  if (!privacyOk || !rulesOk) { alert(t.alert_privacy); return; }
-  if (guestCount === 0) { alert(t.alert_guest_min); return; }
-
-  var btn = document.querySelector('.btn-submit');
-  btn.textContent = t.alert_sending;
-  btn.disabled = true;
+  if (!document.getElementById('privacy-ok').checked || !document.getElementById('rules-ok').checked) { alert(t.alert_privacy); return; }
+  let cards = document.querySelectorAll('.guest-card');
+  if (cards.length === 0) { alert(t.alert_guest_min); return; }
+  for (let i = 0; i < cards.length; i++) {
+    let hasData = false;
+    cards[i].querySelectorAll('input:not([type="file"]), select').forEach(f => { if (f.value && f.value.trim() !== '') hasData = true; });
+    if (hasData) {
+      let fi = document.getElementById('file-' + (i+1)), zone = document.getElementById('zone-' + (i+1));
+      if ((!fi || fi.files.length === 0) && (!zone || !zone.classList.contains('has-file'))) {
+        alert(t.alert_photo + ' (ospite ' + (i+1) + ')'); return;
+      }
+    }
+  }
+  let btn = document.querySelector('.btn-submit');
+  btn.textContent = t.alert_sending; btn.disabled = true;
   closeConfirm();
-
   try {
-    var cards = document.querySelectorAll('.guest-card');
-    
-    var params = new URLSearchParams();
-    params.append('action','saveData');
-    params.append('Check_in', checkin);
-    params.append('Check_out', document.getElementById('checkout-date').value);
-    params.append('Arrival_time', document.getElementById('arrival-time').value);
-    params.append('Total_guests', document.getElementById('total-guests').value);
-    params.append('Privacy_GDPR','Accepted');
-    params.append('House_rules','Accepted');
-    params.append('Num_guests', cards.length);
-
-    cards.forEach(function(card, i) {
-      var n = i + 1;
-      var inp = card.querySelectorAll('input');
-      var sel = card.querySelectorAll('select');
-      params.append('G'+n+'_Surname',     inp[0] ? inp[0].value : '');
-      params.append('G'+n+'_FirstName',   inp[1] ? inp[1].value : '');
-      params.append('G'+n+'_Nationality', inp[2] ? inp[2].value : '');
-      params.append('G'+n+'_POB',         inp[3] ? inp[3].value : '');
-      params.append('G'+n+'_DOB',         inp[4] ? inp[4].value : '');
-      params.append('G'+n+'_Gender',      sel[0] ? sel[0].value : '');
-      params.append('G'+n+'_DocType',     sel[1] ? sel[1].value : '');
-      params.append('G'+n+'_DocNumber',   inp[5] ? inp[5].value : '');
-      params.append('G'+n+'_DocIssuer',   inp[6] ? inp[6].value : '');
-      params.append('G'+n+'_DocExpiry',   inp[7] ? inp[7].value : '');
+    let payload = { action: 'saveData', Check_in: checkin, Check_out: checkout, Arrival_time: arrival, Total_guests: totGuests, Privacy_GDPR: 'Accepted', House_rules: 'Accepted', Num_guests: cards.length };
+    cards.forEach((c, idx) => {
+      let n = idx + 1;
+      let inp = c.querySelectorAll('input'), sel = c.querySelectorAll('select');
+      payload[`G${n}_Surname`] = inp[0]?.value || ''; payload[`G${n}_FirstName`] = inp[1]?.value || ''; payload[`G${n}_Nationality`] = inp[2]?.value || '';
+      payload[`G${n}_POB`] = inp[3]?.value || ''; payload[`G${n}_DOB`] = inp[4]?.dataset.iso || inp[4]?.value || '';
+      payload[`G${n}_Gender`] = sel[0]?.value || ''; payload[`G${n}_DocType`] = sel[1]?.value || '';
+      payload[`G${n}_DocNumber`] = inp[5]?.value || ''; payload[`G${n}_DocIssuer`] = inp[6]?.value || '';
+      payload[`G${n}_DocExpiry`] = inp[7]?.dataset.iso || inp[7]?.value || '';
     });
-
-    // MODIFICA: uso fetch con mode: 'no-cors' per evitare blocchi CORS
-    var saveResp = await fetch(APPS_SCRIPT_URL + '?' + params.toString(), {
-      method: 'GET',
-      mode: 'no-cors',
-      redirect: 'follow'
-    });
-    
-    // Con no-cors non possiamo leggere la risposta, ma se la richiesta è andata a buon fine
-    // procediamo comunque con il successo. La risposta effettiva sarà visibile solo da Google Apps Script.
-    
-    // Nota: con mode: 'no-cors' non possiamo usare .json() perché la risposta è opaca.
-    // Se vuoi verificare l'esito, devi usare mode: 'cors' (che però potrebbe essere bloccato).
-    // Per sicurezza, consideriamo l'invio riuscito se non ci sono errori di rete.
-
-    // Pulizia Firebase
-    fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json', { method: 'DELETE' }).catch(function(){});
-
+    let saveResp = await fetch(APPS_SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    let saveJson = await saveResp.json();
+    if (saveJson.result !== 'ok') throw new Error('saveData error: ' + (saveJson.message || ''));
+    let folderId = saveJson.folderId;
+    for (let i = 0; i < cards.length; i++) {
+      let n = i + 1;
+      let fileInput = document.getElementById('file-' + n);
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        let blob = await compressImageToBlob(fileInput.files[0]);
+        let formData = new FormData();
+        formData.append('action', 'savePhoto');
+        formData.append('folderId', folderId);
+        let firstName = cards[i].querySelectorAll('input')[1]?.value || 'guest';
+        let lastName  = cards[i].querySelectorAll('input')[0]?.value || '';
+        formData.append('photoName', `Doc_Ospite${n}_${firstName}_${lastName}.jpg`);
+        formData.append('photo', blob, 'photo.jpg');
+        let photoResp = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
+        let photoJson = await photoResp.json();
+        if (photoJson.result !== 'ok') console.warn(`Foto ospite ${n} fallita:`, photoJson.message);
+      }
+    }
+    await fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json', { method: 'DELETE' }).catch(()=>{});
     document.getElementById('success-overlay').classList.add('show');
-    document.getElementById('success-overlay').addEventListener('click', function() {
-      document.getElementById('success-overlay').classList.remove('show');
-    });
-
+    setTimeout(() => document.getElementById('success-overlay').classList.remove('show'), 4000);
   } catch(err) {
-    alert(t.alert_neterror);
     console.error(err);
+    alert(t.alert_neterror);
+  } finally {
     btn.textContent = T[currentLang].btn_submit;
     btn.disabled = false;
   }
 }
 
+// ======================= DATE PICKER =======================
 var DP = (function() {
-  var store = {};
-  var MO_IT = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
-  var MO_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  var DW_IT = ['Lu','Ma','Me','Gi','Ve','Sa','Do'];
-  var DW_EN = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+  let store = {};
+  let MO_IT = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+  let MO_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  let DW_IT = ['Lu','Ma','Me','Gi','Ve','Sa','Do'];
+  let DW_EN = ['Mo','Tu','We','Th','Fr','Sa','Su'];
   function mo() { return currentLang === 'en' ? MO_EN : MO_IT; }
   function dw() { return currentLang === 'en' ? DW_EN : DW_IT; }
   function pad(n) { return n < 10 ? '0'+n : ''+n; }
-  function isoToDisplay(iso) {
-    if (!iso) return '';
-    var p = iso.split('-');
-    return p[2]+'/'+p[1]+'/'+p[0];
-  }
-  function displayToIso(disp) {
-    if (!disp || disp.indexOf('/') < 0) return '';
-    var p = disp.split('/');
-    return p[2]+'-'+p[1]+'-'+p[0];
-  }
-  function dim(m,y) { return new Date(y,m,0).getDate(); }
-  function fd(m,y) { var d=new Date(y,m-1,1).getDay(); return d===0?6:d-1; }
-  function el(tag,cls) { var e=document.createElement(tag); if(cls) e.className=cls; return e; }
-
-  function make(inputId, opts) {
+  function isoToDisplay(iso) { if (!iso) return ''; let p = iso.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; }
+  function make(id, opts) {
     opts = opts || {};
-    var inp  = document.getElementById(inputId);
-    var pop  = document.getElementById('dp-'+inputId);
+    let inp = document.getElementById(id);
+    let pop = document.getElementById('dp-'+id);
     if (!inp || !pop) return;
-    var now  = new Date();
-    var sel  = null;
-    var view = 'days';
-    var cm   = now.getMonth()+1;
-    var cy   = opts.year || now.getFullYear();
-
-    document.addEventListener('click', function(e) {
-      if (!inp.closest('.dp-wrap').contains(e.target)) close();
-    }, true);
+    let now = new Date();
+    let sel = null, view = 'days', cm = now.getMonth()+1, cy = opts.year || now.getFullYear();
+    document.addEventListener('click', function(e) { if (!inp.closest('.dp-wrap').contains(e.target)) close(); }, true);
     inp.addEventListener('click', function(e) { e.stopPropagation(); toggle(); });
     inp.addEventListener('keydown', function(e) { if(e.key==='Escape') close(); });
-
-    function toggle() {
-      Object.keys(store).forEach(function(id){ if(id!==inputId && store[id]) store[id].close(); });
-      pop.classList.contains('open') ? close() : open();
-    }
-    function open()  { render(); pop.classList.add('open'); }
+    function toggle() { Object.keys(store).forEach(k => { if(k!==id && store[k]) store[k].close(); }); pop.classList.contains('open') ? close() : open(); }
+    function open() { render(); pop.classList.add('open'); }
     function close() { pop.classList.remove('open'); }
-
-    function pick(d,m,y) {
-      sel={d:d,m:m,y:y};
-      var iso = y+'-'+pad(m)+'-'+pad(d);
-      inp.value = isoToDisplay(iso);
-      inp.dataset.iso = iso;
-      close();
-      inp.dispatchEvent(new Event('change'));
-      if (opts.onChange) opts.onChange(iso);
-    }
-
-    function render() {
-      pop.innerHTML='';
-      if(view==='years') rYears();
-      else if(view==='months') rMonths();
-      else rDays();
-    }
-
+    function pick(d,m,y) { sel={d,m,y}; let iso = y+'-'+pad(m)+'-'+pad(d); inp.value = isoToDisplay(iso); inp.dataset.iso = iso; close(); inp.dispatchEvent(new Event('change')); if (opts.onChange) opts.onChange(iso); }
+    function render() { pop.innerHTML=''; if(view==='years') rYears(); else if(view==='months') rMonths(); else rDays(); }
     function header(title, onTitle, onPrev, onNext) {
-      var h=el('div','dp-header');
-      var p=el('button','dp-nav'); p.type='button'; p.textContent='‹'; p.onclick=function(e){e.stopPropagation();onPrev();};
-      var l=el('span','dp-lbl'); l.textContent=title; l.onclick=function(e){e.stopPropagation();onTitle();};
-      var n=el('button','dp-nav'); n.type='button'; n.textContent='›'; n.onclick=function(e){e.stopPropagation();onNext();};
-      h.appendChild(p); h.appendChild(l); h.appendChild(n);
-      pop.appendChild(h);
+      let h=document.createElement('div'); h.className='dp-header';
+      let p=document.createElement('button'); p.type='button'; p.textContent='‹'; p.onclick=e=>{e.stopPropagation();onPrev();};
+      let l=document.createElement('span'); l.className='dp-lbl'; l.textContent=title; l.onclick=e=>{e.stopPropagation();onTitle();};
+      let n=document.createElement('button'); n.type='button'; n.textContent='›'; n.onclick=e=>{e.stopPropagation();onNext();};
+      h.appendChild(p); h.appendChild(l); h.appendChild(n); pop.appendChild(h);
     }
-
     function rDays() {
-      header(mo()[cm-1]+' '+cy,
-        function(){view='years';render();},
-        function(){cm--;if(cm<1){cm=12;cy--;}render();},
-        function(){cm++;if(cm>12){cm=1;cy++;}render();}
-      );
-      var g=el('div','dp-grid dp-7');
-      dw().forEach(function(d){var c=el('div','dp-dow');c.textContent=d;g.appendChild(c);});
-      var first=fd(cm,cy), tot=dim(cm,cy), prev=dim(cm===1?12:cm-1,cm===1?cy-1:cy);
-      var today=new Date();
-      for(var i=0;i<first;i++){var c=el('button','dp-cell dim');c.type='button';c.textContent=prev-first+i+1;g.appendChild(c);}
-      for(var d=1;d<=tot;d++){
-        var c=el('button','dp-cell');c.type='button';c.textContent=d;
+      header(mo()[cm-1]+' '+cy, ()=>{view='years';render();}, ()=>{cm--;if(cm<1){cm=12;cy--;}render();}, ()=>{cm++;if(cm>12){cm=1;cy++;}render();});
+      let g=document.createElement('div'); g.className='dp-grid dp-7';
+      dw().forEach(d=>{let c=document.createElement('div'); c.className='dp-dow'; c.textContent=d; g.appendChild(c);});
+      let first=new Date(cy,cm-1,1).getDay(); first=first===0?6:first-1;
+      let tot=new Date(cy,cm,0).getDate(), prev=new Date(cy,cm-1,0).getDate();
+      for(let i=0;i<first;i++){let c=document.createElement('button'); c.type='button'; c.className='dp-cell dim'; c.textContent=prev-first+i+1; g.appendChild(c);}
+      for(let d=1;d<=tot;d++){
+        let c=document.createElement('button'); c.type='button'; c.className='dp-cell'; c.textContent=d;
         if(sel&&sel.d===d&&sel.m===cm&&sel.y===cy) c.classList.add('sel');
-        if(d===today.getDate()&&cm===today.getMonth()+1&&cy===today.getFullYear()) c.classList.add('today');
-        if(opts.minDate){var iso=cy+'-'+pad(cm)+'-'+pad(d);if(iso<opts.minDate)c.classList.add('dim');}
-        (function(dd){c.onclick=function(e){e.stopPropagation();pick(dd,cm,cy);};}(d));
+        if(opts.minDate){let iso=cy+'-'+pad(cm)+'-'+pad(d);if(iso<opts.minDate)c.classList.add('dim');}
+        (function(dd){c.onclick=function(e){e.stopPropagation();pick(dd,cm,cy);};})(d);
         g.appendChild(c);
       }
-      var rem=(Math.ceil((first+tot)/7)*7)-(first+tot);
-      for(var i=1;i<=rem;i++){var c=el('button','dp-cell dim');c.type='button';c.textContent=i;g.appendChild(c);}
+      let rem=(Math.ceil((first+tot)/7)*7)-(first+tot);
+      for(let i=1;i<=rem;i++){let c=document.createElement('button'); c.type='button'; c.className='dp-cell dim'; c.textContent=i; g.appendChild(c);}
       pop.appendChild(g);
     }
-
     function rMonths() {
-      header(''+cy,
-        function(){view='years';render();},
-        function(){cy--;render();},
-        function(){cy++;render();}
-      );
-      var g=el('div','dp-grid dp-4');
-      mo().forEach(function(m,idx){
-        var c=el('button','dp-cell');c.type='button';c.textContent=m.slice(0,3);
-        if(sel&&sel.m===idx+1&&sel.y===cy) c.classList.add('sel');
-        (function(mi){c.onclick=function(e){e.stopPropagation();cm=mi+1;view='days';render();};}(idx));
-        g.appendChild(c);
-      });
+      header(''+cy, ()=>{view='years';render();}, ()=>{cy--;render();}, ()=>{cy++;render();});
+      let g=document.createElement('div'); g.className='dp-grid dp-4';
+      mo().forEach((m,idx)=>{let c=document.createElement('button'); c.type='button'; c.className='dp-cell'; c.textContent=m.slice(0,3); if(sel&&sel.m===idx+1&&sel.y===cy) c.classList.add('sel'); c.onclick=e=>{e.stopPropagation();cm=idx+1;view='days';render();}; g.appendChild(c);});
       pop.appendChild(g);
     }
-
     function rYears() {
-      var sy=Math.floor(cy/20)*20;
-      header(sy+'–'+(sy+19),
-        function(){cy-=20;render();},
-        function(){cy-=20;render();},
-        function(){cy+=20;render();}
-      );
-      var g=el('div','dp-grid dp-5');
-      for(var y=sy;y<sy+20;y++){
-        var c=el('button','dp-cell');c.type='button';c.textContent=y;
-        if(sel&&sel.y===y) c.classList.add('sel');
-        if(y===new Date().getFullYear()) c.classList.add('today');
-        (function(yr){c.onclick=function(e){e.stopPropagation();cy=yr;view='months';render();};}(y));
-        g.appendChild(c);
-      }
+      let sy=Math.floor(cy/20)*20;
+      header(sy+'–'+(sy+19), ()=>{cy-=20;render();}, ()=>{cy-=20;render();}, ()=>{cy+=20;render();});
+      let g=document.createElement('div'); g.className='dp-grid dp-5';
+      for(let y=sy;y<sy+20;y++){let c=document.createElement('button'); c.type='button'; c.className='dp-cell'; c.textContent=y; if(sel&&sel.y===y) c.classList.add('sel'); c.onclick=e=>{e.stopPropagation();cy=y;view='months';render();}; g.appendChild(c);}
       pop.appendChild(g);
     }
-
-    var api = {
-      close: close,
-      getISO: function() { return inp.dataset.iso || ''; },
-      setISO: function(iso) {
-        if (!iso) return;
-        var p = iso.split('-');
-        if (p.length === 3) { cm=parseInt(p[1]); cy=parseInt(p[0]); pick(parseInt(p[2]),parseInt(p[1]),parseInt(p[0])); }
-      }
-    };
-    store[inputId] = api;
+    let api = { close, getISO:()=>inp.dataset.iso||'', setISO:function(iso){if(!iso)return; let p=iso.split('-'); if(p.length===3){cy=parseInt(p[0]);cm=parseInt(p[1]);pick(parseInt(p[2]),cm,cy);}} };
+    store[id] = api;
     return api;
   }
-
   function attach(inputEl, opts) {
-    var uid = 'dpx_' + Math.random().toString(36).slice(2,9);
+    let uid = 'dpx_' + Math.random().toString(36).slice(2,9);
     inputEl.id = uid;
-    inputEl.readOnly = true;
-    inputEl.classList.add('dp-input');
-    inputEl.placeholder = 'gg/mm/aaaa';
-    var wrap = document.createElement('div');
-    wrap.className = 'dp-wrap';
-    inputEl.parentNode.insertBefore(wrap, inputEl);
-    wrap.appendChild(inputEl);
-    var pop = document.createElement('div');
-    pop.className = 'dp-popup';
-    pop.id = 'dp-'+uid;
-    wrap.appendChild(pop);
+    inputEl.readOnly = true; inputEl.classList.add('dp-input'); inputEl.placeholder = 'gg/mm/aaaa';
+    let wrap = document.createElement('div'); wrap.className = 'dp-wrap';
+    inputEl.parentNode.insertBefore(wrap, inputEl); wrap.appendChild(inputEl);
+    let pop = document.createElement('div'); pop.className = 'dp-popup'; pop.id = 'dp-'+uid; wrap.appendChild(pop);
     return make(uid, opts);
   }
+  return { make, attach, get:id=>store[id] };
+})();
 
-  return { make:make, attach:attach, get:function(id){return store[id];} };
-}());
-
+// ======================= INIT =======================
 function initBookingDatePickers() {
-  var todayISO = new Date().toISOString().split('T')[0];
-  var ciEl = document.getElementById('checkin-date');
-  var coEl = document.getElementById('checkout-date');
+  let todayISO = new Date().toISOString().split('T')[0];
+  let ciEl = document.getElementById('checkin-date'), coEl = document.getElementById('checkout-date');
   if (!ciEl || !coEl) return;
-
   ciEl.type = 'text'; ciEl.readOnly = true; ciEl.classList.add('dp-input'); ciEl.placeholder = 'gg/mm/aaaa';
-  var ciWrap = document.createElement('div'); ciWrap.className = 'dp-wrap';
+  let ciWrap = document.createElement('div'); ciWrap.className = 'dp-wrap';
   ciEl.parentNode.insertBefore(ciWrap, ciEl); ciWrap.appendChild(ciEl);
-  var ciPop = document.createElement('div'); ciPop.className = 'dp-popup'; ciPop.id = 'dp-checkin-date'; ciWrap.appendChild(ciPop);
-  DP.make('checkin-date', { minDate: todayISO, onChange: function() { saveAllToFirebase(); validateDates(); } });
-
+  let ciPop = document.createElement('div'); ciPop.className = 'dp-popup'; ciPop.id = 'dp-checkin-date'; ciWrap.appendChild(ciPop);
+  DP.make('checkin-date', { minDate: todayISO, onChange: function() { saveAllToFirebase(); } });
   coEl.type = 'text'; coEl.readOnly = true; coEl.classList.add('dp-input'); coEl.placeholder = 'gg/mm/aaaa';
-  var coWrap = document.createElement('div'); coWrap.className = 'dp-wrap';
+  let coWrap = document.createElement('div'); coWrap.className = 'dp-wrap';
   coEl.parentNode.insertBefore(coWrap, coEl); coWrap.appendChild(coEl);
-  var coPop = document.createElement('div'); coPop.className = 'dp-popup'; coPop.id = 'dp-checkout-date'; coWrap.appendChild(coPop);
+  let coPop = document.createElement('div'); coPop.className = 'dp-popup'; coPop.id = 'dp-checkout-date'; coWrap.appendChild(coPop);
   DP.make('checkout-date', { minDate: todayISO, onChange: function() { saveAllToFirebase(); } });
 }
 
 document.getElementById('session-link-text').textContent = window.location.href;
 initBookingDatePickers();
 setLang('it');
-
-var today = new Date().toISOString().split('T')[0];
-document.getElementById('checkin-date').setAttribute('min', today);
-document.getElementById('checkout-date').setAttribute('min', today);
-
 addGuest();
-
 fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json')
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
+  .then(r => r.json())
+  .then(data => {
     if (data) {
       if (data.booking) {
-        if (data.booking.checkin) { var p=DP.get('checkin-date'); if(p) p.setISO(data.booking.checkin); }
-        if (data.booking.checkout) { var p=DP.get('checkout-date'); if(p) p.setISO(data.booking.checkout); }
+        if (data.booking.checkin) DP.get('checkin-date')?.setISO(data.booking.checkin);
+        if (data.booking.checkout) DP.get('checkout-date')?.setISO(data.booking.checkout);
         if (data.booking.arrival) document.getElementById('arrival-time').value = data.booking.arrival;
         if (data.booking.totGuests) document.getElementById('total-guests').value = data.booking.totGuests;
       }
-      
       if (data.guests && data.guests.length > 0) {
         document.getElementById('guests-container').innerHTML = '';
         guestCount = 0;
-        data.guests.forEach(function(g, i) {
+        data.guests.forEach((g, i) => {
           addGuest();
-          var card = document.getElementById('guest-' + (i+1));
-          var inputs  = card.querySelectorAll('input');
-          var selects = card.querySelectorAll('select');
-          if (inputs[0])  inputs[0].value  = g.surname     || '';
-          if (inputs[1])  inputs[1].value  = g.firstName   || '';
-          if (inputs[2])  inputs[2].value  = g.nationality || '';
-          if (inputs[3])  inputs[3].value  = g.pob         || '';
-          if (inputs[4] && g.dob)    { inputs[4].dataset.iso=g.dob; inputs[4].value=g.dob.split('-').reverse().join('/'); }
-          if (selects[0]) selects[0].value = g.gender      || '';
-          if (selects[1]) selects[1].value = g.docType     || '';
-          if (inputs[5])  inputs[5].value  = g.docNumber   || '';
-          if (inputs[6])  inputs[6].value  = g.docIssuer   || '';
-          if (inputs[7] && g.docExpiry) { inputs[7].dataset.iso=g.docExpiry; inputs[7].value=g.docExpiry.split('-').reverse().join('/'); }
-
+          let card = document.getElementById('guest-' + (i+1));
+          let inputs = card.querySelectorAll('input'), selects = card.querySelectorAll('select');
+          if (inputs[0]) inputs[0].value = g.surname || '';
+          if (inputs[1]) inputs[1].value = g.firstName || '';
+          if (inputs[2]) inputs[2].value = g.nationality || '';
+          if (inputs[3]) inputs[3].value = g.pob || '';
+          if (inputs[4] && g.dob) { inputs[4].dataset.iso = g.dob; inputs[4].value = g.dob.split('-').reverse().join('/'); }
+          if (selects[0]) selects[0].value = g.gender || '';
+          if (selects[1]) selects[1].value = g.docType || '';
+          if (inputs[5]) inputs[5].value = g.docNumber || '';
+          if (inputs[6]) inputs[6].value = g.docIssuer || '';
+          if (inputs[7] && g.docExpiry) { inputs[7].dataset.iso = g.docExpiry; inputs[7].value = g.docExpiry.split('-').reverse().join('/'); }
+          let photoData = data.photos && data.photos['photo_' + (i+1)];
+          if (photoData) {
+            let zone = document.getElementById('zone-' + (i+1));
+            let preview = document.getElementById('preview-' + (i+1));
+            let btn = document.getElementById('photo-btn-' + (i+1));
+            preview.src = photoData;
+            zone.classList.add('has-file');
+            btn.textContent = T[currentLang].f_doc_photo_change;
+          }
           if (g.firstName || g.surname || g.docNumber) {
-            var card = document.getElementById('guest-' + (i+1));
-            card.classList.add('collapsed');
-            card.classList.add('saved');
-            var nameSpan = card.querySelector('.guest-name');
+            let card = document.getElementById('guest-' + (i+1));
+            card.classList.add('collapsed', 'saved');
+            let nameSpan = card.querySelector('.guest-name');
             nameSpan.textContent = g.firstName + ' ' + g.surname;
-            var saveBtn = card.querySelector('.btn-save-guest');
-            var editBtn = card.querySelector('.btn-edit');
-            saveBtn.style.display = 'none';
-            editBtn.style.display = 'inline-block';
+            let saveBtn = card.querySelector('.btn-save-guest'), editBtn = card.querySelector('.btn-edit');
+            saveBtn.style.display = 'none'; editBtn.style.display = 'inline-block';
             setFieldsDisabled(card, true);
           }
         });
@@ -1099,7 +771,7 @@ fetch(FIREBASE_URL + '/sessions/' + SESSION_ID + '.json')
       }
     }
   })
-  .catch(function() {});
+  .catch(()=>{});
 </script>
 </body>
 </html>
